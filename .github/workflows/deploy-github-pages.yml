@@ -1,11 +1,11 @@
 name: Deploy to GitHub Pages
 
-# Trigger deployment when changes are pushed to the main branch
+# Trigger deployment when changes are pushed to the Production branch
 on:
   push:
     branches:
       - Production
-      
+
 permissions:
   contents: write
   pages: write
@@ -35,7 +35,12 @@ jobs:
 
       # Step 5: Deploy the contents of the `dist` folder to GitHub Pages
       - name: Deploy to GitHub Pages
+        id: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+      # Step 6: Print the URL of the deployed website
+      - name: Display Deployed URL
+        run: "echo Deployed website URL: ${{ steps.deploy.outputs.page_url }}"

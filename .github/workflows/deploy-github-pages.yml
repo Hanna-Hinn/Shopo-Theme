@@ -6,6 +6,10 @@ on:
     branches:
       - Production
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

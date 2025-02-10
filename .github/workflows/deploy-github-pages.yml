@@ -1,0 +1,37 @@
+name: Deploy to GitHub Pages
+
+# Trigger deployment when changes are pushed to the main branch
+on:
+  push:
+    branches:
+      - Production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js (choose the version your project requires)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x" # Change this if you need a different version
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # Step 4: Build the project (this will create the `dist` folder)
+      - name: Build
+        run: npm run build
+
+      # Step 5: Deploy the contents of the `dist` folder to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

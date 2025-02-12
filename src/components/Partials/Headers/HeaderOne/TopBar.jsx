@@ -6,8 +6,9 @@ export default function TopBar({ className }) {
   return (
     <>
       <div
-        className={`w-full bg-white h-10 border-b border-qgray-border ${className || ""
-          }`}
+        className={`w-full bg-white h-10 border-b border-qgray-border ${
+          className || ""
+        }`}
       >
         <div className="container-x mx-auto h-full">
           <div className="flex justify-between items-center h-full">
@@ -41,8 +42,9 @@ export default function TopBar({ className }) {
                 <div className="country-select flex space-x-1 items-center">
                   <div>
                     <img
-                      src={`${import.meta.env.VITE_PUBLIC_URL
-                        }/assets/images/country-logo-16x16.png`}
+                      src={`${
+                        import.meta.env.VITE_PUBLIC_URL
+                      }/assets/images/country-logo-16x16.png`}
                       width="16"
                       height="16"
                       alt="country logo"
@@ -51,17 +53,19 @@ export default function TopBar({ className }) {
                   </div>
                   <Selectbox
                     className="w-fit"
-                    datas={["English", "العربية "]}
+                    datas={["United State", "Bangladesh", "India"]}
                   />
                   <div>
                     <Arrow className="fill-current qblack" />
                   </div>
                 </div>
                 <div className="currency-select flex space-x-1 items-center">
-                  <Selectbox className="w-fit" datas={["USD"]} />
+                  <Selectbox className="w-fit" datas={["USD", "BDT"]} />
                   <Arrow className="fill-current qblack" />
                 </div>
                 <div className="language-select flex space-x-1 items-center">
+                  <Selectbox className="w-fit" datas={["Bangla", "english"]} />
+                  <Arrow className="fill-current qblack" />
                 </div>
               </div>
             </div>

@@ -3,7 +3,7 @@
   "private": true,
   "version": "5.9.0",
   "type": "module",
-  "homepage": "https://Hanna-Hinn.github.io/Shopo-Theme",
+  "homepage" : "https://Hanna-Hinn.github.io/Shopo-Theme",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -19,7 +19,6 @@
     "react-range-slider-input": "^3.0.7",
     "react-router-dom": "^6.25.1",
     "react-slick": "^0.30.2",
-    "shopo-react": "file:",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^4.2.2"
   },

@@ -712,7 +712,7 @@ export default function Navbar({ className }) {
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link to="/">
+                                  <Link to="/home-two">
                                     <span className="text-qgray text-sm font-400 border-b border-transparent hover:text-qyellow hover:border-qyellow ">
                                       Home Two
                                     </span>

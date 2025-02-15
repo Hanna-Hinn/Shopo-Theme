@@ -38,13 +38,6 @@ export default function Footer() {
                     </span>
                   </Link>
                 </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Warranty
-                    </span>
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
@@ -57,7 +50,7 @@ export default function Footer() {
                 <li>
                   <Link to="/">
                     <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Rave’s Story
+                      Our Story
                     </span>
                   </Link>
                 </li>
@@ -65,20 +58,6 @@ export default function Footer() {
                   <Link to="/">
                     <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
                       Work With Us
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Coporate News
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Investors
                     </span>
                   </Link>
                 </li>
@@ -133,13 +112,6 @@ export default function Footer() {
                 <li>
                   <Link to="/">
                     <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Secure Payment
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
                       Privacy Policy
                     </span>
                   </Link>
@@ -151,13 +123,6 @@ export default function Footer() {
                     </span>
                   </Link>
                 </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Archived Products
-                    </span>
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
@@ -165,40 +130,27 @@ export default function Footer() {
         <div className="bottom-bar border-t border-qgray-border lg:h-[82px] lg:flex justify-between items-center">
           <div className="flex lg:space-x-5 justify-between items-center mb-3">
             <div className="flex space-x-5 items-center">
-              <a href="#">
+              <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
                 <Instagram className="fill-current text-qgray hover:text-qblack" />
               </a>
-              <a href="#">
+              <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
                 <Facebook className="fill-current text-qgray hover:text-qblack" />
               </a>
-              <a href="#">
+              <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
                 <Youtube className="fill-current text-qgray hover:text-qblack" />
               </a>
             </div>
             <span className="sm:text-base text-[10px] text-qgray font-300">
-              ©2022
+              ©2025
               <a
-                href="https://quomodosoft.com/"
-                target="_blank"
-                rel="noreferrer"
+                href=""
                 className="font-500 text-qblack mx-1"
               >
-                Quomodosoft
+               herb-ecommerce-shop
+
               </a>
               All rights reserved
             </span>
-          </div>
-          <div className="">
-            <a href="#">
-              <img
-                width="318"
-                height="28"
-                src={`${
-                  import.meta.env.VITE_PUBLIC_URL
-                }/assets/images/payment-getways.png`}
-                alt="payment-getways"
-              />
-            </a>
           </div>
         </div>
       </div>

@@ -1,12 +1,10 @@
-import React from "react";
-import LayoutHomeTwo from "../Partials/LayoutHomeTwo";
-
 import datas from "../../data/productsTwo.json";
 import SectionStyleFour from "../Helpers/SectionStyleFour";
 import SectionStyleThreeHomeTwo from "../Helpers/SectionStyleThreeHomeTwo";
 import SectionStyleTwo from "../Helpers/SectionStyleTwoHomeTwo";
 import ViewMoreTitle from "../Helpers/ViewMoreTitle";
 import ProductsAds from "../Home/ProductsAds";
+import Layout from "../Partials/Layout";
 import Banner from "./Banner";
 import CampaignCountDown from "./CampaignCountDown";
 import CategoriesSection from "./CategoriesSection";
@@ -14,7 +12,7 @@ import CategoriesSection from "./CategoriesSection";
 export default function HomeTwo() {
   const { products } = datas;
   return (
-    <LayoutHomeTwo>
+    <Layout>
       <Banner className="banner-wrapper mb-[46px]" />
       <ViewMoreTitle
         className="my-categories mb-[60px]"
@@ -54,7 +52,9 @@ export default function HomeTwo() {
         <SectionStyleTwo products={products.slice(3, products.length)} />
       </ViewMoreTitle>
       <ProductsAds
-        ads={[`${import.meta.env.VITE_PUBLIC_URL}/assets/images/bannera-2.3.png`]}
+        ads={[
+          `${import.meta.env.VITE_PUBLIC_URL}/assets/images/bannera-2.3.png`,
+        ]}
         className="products-ads-section mb-[60px]"
       />
       <SectionStyleThreeHomeTwo
@@ -66,7 +66,9 @@ export default function HomeTwo() {
       />
       <ProductsAds
         sectionHeight="164"
-        ads={[`${import.meta.env.VITE_PUBLIC_URL}/assets/images/bannera-2.4.png`]}
+        ads={[
+          `${import.meta.env.VITE_PUBLIC_URL}/assets/images/bannera-2.4.png`,
+        ]}
         className="products-ads-section mb-[60px]"
       />
       <SectionStyleFour
@@ -75,6 +77,6 @@ export default function HomeTwo() {
         seeMoreUrl="/all-products"
         className="category-products mb-[60px]"
       />
-    </LayoutHomeTwo>
+    </Layout>
   );
 }

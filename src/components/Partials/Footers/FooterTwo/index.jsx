@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Facebook from "../../../Helpers/icons/Facebook";
 import Instagram from "../../../Helpers/icons/Instagram";
 import Youtube from "../../../Helpers/icons/Youtube";
+import Logo from "../../../../assets/images/logo.png";
 
 export default function Footer() {
   return (
@@ -12,14 +13,7 @@ export default function Footer() {
             {/* logo area */}
             <div className="mb-14">
               <Link to="/">
-                <img
-                  width="152"
-                  height="36"
-                  src={`${
-                    import.meta.env.VITE_PUBLIC_URL
-                  }/assets/images/logo-2.svg`}
-                  alt="logo"
-                />
+                <img width="152" height="36" src={Logo} alt="logo" />
               </Link>
             </div>
             <div>
@@ -130,24 +124,32 @@ export default function Footer() {
         <div className="bottom-bar border-t border-qgray-border lg:h-[82px] lg:flex justify-between items-center">
           <div className="flex lg:space-x-5 justify-between items-center mb-3">
             <div className="flex space-x-5 items-center">
-              <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Instagram className="fill-current text-qgray hover:text-qblack" />
               </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Facebook className="fill-current text-qgray hover:text-qblack" />
               </a>
-              <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Youtube className="fill-current text-qgray hover:text-qblack" />
               </a>
             </div>
             <span className="sm:text-base text-[10px] text-qgray font-300">
               ©2025
-              <a
-                href=""
-                className="font-500 text-qblack mx-1"
-              >
-               herb-ecommerce-shop
-
+              <a href="" className="font-500 text-qblack mx-1">
+                herb-ecommerce-shop
               </a>
               All rights reserved
             </span>

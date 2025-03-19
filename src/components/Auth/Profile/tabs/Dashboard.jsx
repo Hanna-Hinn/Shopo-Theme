@@ -9,99 +9,46 @@ export default function Dashboard() {
           </h1>
         </div>
       </div>
-      <div className="dashboard-info mt-8 flex justify-between items-center bg-primarygray px-7 py-7">
-        <div className="">
+      <div className="dashboard-info mt-8 flex flex-col bg-primarygray px-7 py-7">
+        <div>
           <p className="title text-[22px] font-semibold">
-            Parsonal Information
+            Personal Information
           </p>
           <div className="mt-5">
             <table>
               <tbody>
-                <tr className="inline-flex mb-5">
-                  <td className="text-base text-qgraytwo w-[100px] block">
-                    <div>Name:</div>
-                  </td>
-                  <td className="text-base text-qblack font-medium">
+                {/* Each row now stacks its cells vertically */}
+                <tr className="mb-5 block">
+                  <td className="text-base text-qgraytwo block mb-1">Name:</td>
+                  <td className="text-base text-qblack font-medium block">
                     John Doe
                   </td>
                 </tr>
-                <tr className="inline-flex mb-5">
-                  <td className="text-base text-qgraytwo w-[100px] block">
-                    <div>Email:</div>
-                  </td>
-                  <td className="text-base text-qblack font-medium">
+                <tr className="mb-5 block">
+                  <td className="text-base text-qgraytwo block mb-1">Email:</td>
+                  <td className="text-base text-qblack font-medium block">
                     John@gmail.com
                   </td>
                 </tr>
-                <tr className="inline-flex mb-5">
-                  <td className="text-base text-qgraytwo w-[100px] block">
-                    <div>Phone:</div>
-                  </td>
-                  <td className="text-base text-qblack font-medium">
+                <tr className="mb-5 block">
+                  <td className="text-base text-qgraytwo block mb-1">Phone:</td>
+                  <td className="text-base text-qblack font-medium block">
                     1234567890
                   </td>
                 </tr>
-                <tr className="inline-flex mb-5">
-                  <td className="text-base text-qgraytwo w-[100px] block">
-                    <div>City:</div>
-                  </td>
-                  <td className="text-base text-qblack font-medium">
+                <tr className="mb-5 block">
+                  <td className="text-base text-qgraytwo block mb-1">City:</td>
+                  <td className="text-base text-qblack font-medium block">
                     WestBank, Palestine
                   </td>
                 </tr>
-                <tr className="inline-flex mb-5">
-                  <td className="text-base text-qgraytwo w-[100px] block">
-                    <div>Zip:</div>
+                <tr className="mb-5 block">
+                  <td className="text-base text-qgraytwo block mb-1">Zip:</td>
+                  <td className="text-base text-qblack font-medium block">
+                    0000
                   </td>
-                  <td className="text-base text-qblack font-medium">0000</td>
                 </tr>
               </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="w-[1px] h-[164px] bg-[#E4E4E4]"></div>
-        <div className="ml-6">
-          <p className="title text-[22px] font-semibold">Shop Info</p>
-          <div className="mt-5">
-            <table>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Name:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">
-                  John Doe
-                </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Email:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">
-                  John@gmail.com
-                </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Phone:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">
-                  1234567890
-                </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>City:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">
-                  WestBank, Palestine
-                </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Zip:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">0000</td>
-              </tr>
             </table>
           </div>
         </div>

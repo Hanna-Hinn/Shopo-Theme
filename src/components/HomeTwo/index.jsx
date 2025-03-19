@@ -14,13 +14,14 @@ export default function HomeTwo() {
   return (
     <Layout>
       <Banner className="banner-wrapper mb-[46px]" />
-      <ViewMoreTitle
+      {/* TODO: Find Icons and Update it */}
+      {/* <ViewMoreTitle
         className="my-categories mb-[60px]"
         seeMoreUrl="/all-products"
         categoryTitle="My Market Category"
       >
         <CategoriesSection />
-      </ViewMoreTitle>
+      </ViewMoreTitle> */}
       <SectionStyleThreeHomeTwo
         products={products}
         showProducts={6}

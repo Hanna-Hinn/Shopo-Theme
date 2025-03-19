@@ -856,17 +856,6 @@ export default function Navbar({ className, type }) {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/blogs">
-                      <span
-                        className={`flex items-center text-sm font-600 cursor-pointer ${
-                          type === 3 ? "text-white" : "text-qblacktext"
-                        }`}
-                      >
-                        <span>Blog</span>
-                      </span>
-                    </Link>
-                  </li>
-                  <li>
                     <Link to="/contact">
                       <span
                         className={`flex items-center text-sm font-600 cursor-pointer ${
@@ -879,41 +868,6 @@ export default function Navbar({ className, type }) {
                   </li>
                 </ul>
               </div>
-            </div>
-            <div className="become-seller-btn">
-              <Link to="/become-saller">
-                <div className="black-btn w-[161px] h-[40px] flex justify-center items-center cursor-pointer">
-                  <div className="flex space-x-2 items-center">
-                    <span className="text-sm font-600">Become a Seller</span>
-                    <span>
-                      <svg
-                        className="fill-current"
-                        width="6"
-                        height="10"
-                        viewBox="0 0 6 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="1.08984"
-                          width="6.94106"
-                          height="1.54246"
-                          transform="rotate(45 1.08984 0)"
-                          fill="white"
-                        />
-                        <rect
-                          x="6"
-                          y="4.9082"
-                          width="6.94106"
-                          height="1.54246"
-                          transform="rotate(135 6 4.9082)"
-                          fill="white"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </Link>
             </div>
           </div>
         </div>

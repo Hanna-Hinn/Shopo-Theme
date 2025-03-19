@@ -1,9 +1,9 @@
 {
-  "name": "shopo-react",
+  "name": "HealthPlus-react",
   "private": true,
   "version": "5.9.0",
   "type": "module",
-  "homepage" : "https://Hanna-Hinn.github.io/Shopo-Theme",
+  "homepage" : "https://Hanna-Hinn.github.io/HealthPlus-Theme",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

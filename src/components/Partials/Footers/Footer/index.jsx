@@ -149,7 +149,7 @@ export default function Footer() {
             <span className="sm:text-base text-[10px] text-qgray font-300">
               ©2025
               <a href="" className="font-500 text-qblack mx-1">
-                herb-ecommerce-shop
+                HealthPlus
               </a>
               All rights reserved
             </span>

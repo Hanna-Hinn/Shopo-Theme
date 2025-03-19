@@ -20,9 +20,9 @@ const pwaConfig = {
     ],
   },
   manifest: {
-    name: "Shopo",
-    short_name: "Shopo",
-    description: "Shopo",
+    name: "HealthPlus",
+    short_name: "HealthPlus",
+    description: "HealthPlus",
     start_url: "/",
     display: "standalone",
     background_color: "#FFBB38",

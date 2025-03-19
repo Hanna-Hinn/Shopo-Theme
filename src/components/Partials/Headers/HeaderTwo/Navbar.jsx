@@ -425,7 +425,11 @@ export default function Navbar({ className }) {
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
-  <path fill="none" stroke="#000000"  d="M2,3.99079514 C2,2.89130934 2.89821238,2 3.99079514,2 L20.0092049,2 C21.1086907,2 22,2.89821238 22,3.99079514 L22,20.0092049 C22,21.1086907 21.1017876,22 20.0092049,22 L3.99079514,22 C2.89130934,22 2,21.1017876 2,20.0092049 L2,3.99079514 Z M12,15 L12,14 C12,13 12,12.5 13,12 C14,11.5 15,11 15,9.5 C15,8.5 14,7 12,7 C10,7 9,8.26413718 9,10 M12,16 L12,18"/>
+                                <path
+                                  fill="none"
+                                  stroke="#000000"
+                                  d="M2,3.99079514 C2,2.89130934 2.89821238,2 3.99079514,2 L20.0092049,2 C21.1086907,2 22,2.89821238 22,3.99079514 L22,20.0092049 C22,21.1086907 21.1017876,22 20.0092049,22 L3.99079514,22 C2.89130934,22 2,21.1017876 2,20.0092049 L2,3.99079514 Z M12,15 L12,14 C12,13 12,12.5 13,12 C14,11.5 15,11 15,9.5 C15,8.5 14,7 12,7 C10,7 9,8.26413718 9,10 M12,16 L12,18"
+                                />
                               </svg>
                             </span>
                             <span className="text-xs font-400">Others </span>
@@ -480,13 +484,6 @@ export default function Navbar({ className }) {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/blogs">
-                      <span className="flex items-center text-sm text-white font-600 cursor-pointer ">
-                        <span>Blog</span>
-                      </span>
-                    </Link>
-                  </li>
-                  <li>
                     <Link to="/contact">
                       <span className="flex items-center text-sm text-white font-600 cursor-pointer ">
                         <span>Contact</span>
@@ -495,38 +492,6 @@ export default function Navbar({ className }) {
                   </li>
                 </ul>
               </div>
-            </div>
-            <div className="become-seller-btn  w-[161px] h-[40px]">
-              <Link to="/become-saller">
-                <div className="yellow-btn flex justify-center items-center cursor-pointer">
-                  <div className="flex space-x-2 items-center">
-                    <span className="text-sm font-600">Become a Seller</span>
-                    <span>
-                      <svg
-                        width="6"
-                        height="10"
-                        viewBox="0 0 6 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="1.08984"
-                          width="6.94106"
-                          height="1.54246"
-                          transform="rotate(45 1.08984 0)"
-                        />
-                        <rect
-                          x="6"
-                          y="4.9082"
-                          width="6.94106"
-                          height="1.54246"
-                          transform="rotate(135 6 4.9082)"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </Link>
             </div>
           </div>
         </div>

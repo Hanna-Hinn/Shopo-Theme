@@ -6,63 +6,59 @@ import Layout from "../Partials/Layout";
 export default function Faq() {
   return (
     <Layout childrenClasses="pt-0 pb-0">
+      {/* Page title and breadcrumb */}
       <div className="faq-page-wrapper w-full mb-10">
         <div className="page-title w-full">
           <PageTitle
-            title="Frequently Asked Questions"
+            title="HealthPlus - FAQs"
             breadcrumb={[
-              { name: "home", path: "/" },
-              { name: "FAQ", path: "/faq" },
+              { name: "Home", path: "/" },
+              { name: "HealthPlus FAQ", path: "/faq" },
             ]}
           />
         </div>
       </div>
+
+      {/* FAQ and Contact Section */}
       <div className="contact-wrapper w-full mb-10">
         <div className="container-x mx-auto">
           <div className="main-wrapper w-full lg:flex lg:space-x-[30px]">
+            {/* FAQ Column */}
             <div className="lg:w-1/2 w-full mb-10 lg:mb-0">
               <h1 className="text-qblack font-bold text-[22px] mb-4">
-                Frequently asked questions
+                Frequently Asked Questions
               </h1>
-              <div className="flex flex-col space-y-7 justify-between">
+              <div className="flex flex-col space-y-7">
                 <Accodion
-                  title="01. How does information technology work?"
-                  des="There are many variations of passages of Lorem Ipsum available into the 
-but the majority have suffered alteration in some form, by injecte find to a
-humour, or randomised words"
+                  title="01. What is HealthPlus?"
+                  des="HealthPlus is a dedicated e-commerce platform that provides wellness, rehabilitation, and recovery herbs and supplements to meet the unique needs of consumers in Palestine."
                 />
                 <Accodion
                   init
-                  title="02. How can I become IT manager?"
-                  des="There are many variations of passages of Lorem Ipsum available into the 
-but the majority have suffered alteration in some form, by injecte find to a
-humour, or randomised words"
+                  title="02. How does HealthPlus support local health needs?"
+                  des="By grouping related products with detailed information and benefits, HealthPlus ensures customers can make informed decisions while enjoying the convenience of online shopping."
                 />
                 <Accodion
-                  title="03. What are the latest trends in IT?"
-                  des="There are many variations of passages of Lorem Ipsum available into the 
-but the majority have suffered alteration in some form, by injecte find to a
-humour, or randomised words"
+                  title="03. What types of products are available on HealthPlus?"
+                  des="Our platform offers a wide range of wellness and recovery products, including various herbs, supplements, and health-related items carefully selected to support a healthy lifestyle."
                 />
                 <Accodion
-                  title="04. How long should a business plan be?"
-                  des="There are many variations of passages of Lorem Ipsum available into the 
-but the majority have suffered alteration in some form, by injecte find to a
-humour, or randomised words"
+                  title="04. How do I trust the quality of the products?"
+                  des="HealthPlus partners with trusted local suppliers and provides comprehensive product information, so you can feel confident about the authenticity and effectiveness of each item."
                 />
                 <Accodion
-                  title="05. How work the support policy?"
-                  des="There are many variations of passages of Lorem Ipsum available into the 
-but the majority have suffered alteration in some form, by injecte find to a
-humour, or randomised words"
+                  title="05. How can I get support or more information?"
+                  des="If you have questions or need assistance, please use the contact form provided on this page. Our dedicated customer service team is here to help you with any inquiries."
                 />
               </div>
             </div>
+
+            {/* Contact Form Column */}
             <div className="flex-1">
               <div className="bg-white sm:p-10 p-5">
                 <div className="title flex flex-col items-center">
                   <h1 className="lg:text-[34px] text-xl font-bold text-qblack">
-                    Have Any Qustion
+                    Have any questions about HealthPlus?
                   </h1>
                   <span className="-mt-5 block">
                     <svg
@@ -84,7 +80,7 @@ humour, or randomised words"
                 <div className="inputs mt-5">
                   <div className="mb-4">
                     <InputCom
-                      label="Frist Name*"
+                      label="First Name*"
                       placeholder="Demo Name"
                       name="first_name"
                       inputClasses="h-[50px]"
@@ -93,13 +89,13 @@ humour, or randomised words"
                   <div className="mb-4">
                     <InputCom
                       label="Email Address*"
-                      placeholder="info@quomodosoft.com"
+                      placeholder="info@healthplus.com"
                       name="email"
                       inputClasses="h-[50px]"
                     />
                   </div>
                   <div className="mb-5">
-                    <h6 className="input-label text-qgray capitalize text-[13px] font-normal block mb-2 ">
+                    <h6 className="input-label text-qgray capitalize text-[13px] font-normal block mb-2">
                       Message*
                     </h6>
                     <textarea

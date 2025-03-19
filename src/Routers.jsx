@@ -35,8 +35,6 @@ const router = createBrowserRouter([
   { path: "/products-compaire", element: <ProductsCompaire /> },
   { path: "/sallers", element: <Sallers /> },
   { path: "/about", element: <About /> },
-  { path: "/blogs", element: <Blogs /> },
-  { path: "/blogs/blog", element: <Blog /> },
   { path: "/tracking-order", element: <TrackingOrder /> },
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <Faq /> },

@@ -5,8 +5,6 @@ import Login from "./components/Auth/Login/index";
 import Profile from "./components/Auth/Profile";
 import Signup from "./components/Auth/Signup";
 import BecomeSaller from "./components/BecomeSaller";
-import Blogs from "./components/Blogs";
-import Blog from "./components/Blogs/Blog.jsx";
 import CardPage from "./components/CartPage";
 import CheakoutPage from "./components/CheakoutPage";
 import Contact from "./components/Contact";

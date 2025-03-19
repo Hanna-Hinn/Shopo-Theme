@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Facebook from "../../../Helpers/icons/Facebook";
 import Instagram from "../../../Helpers/icons/Instagram";
 import Youtube from "../../../Helpers/icons/Youtube";
+import Logo from "../../../../assets/images/logo.png";
 
 export default function Footer() {
   return (
@@ -12,14 +13,7 @@ export default function Footer() {
             {/* logo area */}
             <div className="mb-14">
               <Link to="/">
-                <img
-                  width="152"
-                  height="36"
-                  src={`${
-                    import.meta.env.VITE_PUBLIC_URL
-                  }/assets/images/logo-2.svg`}
-                  alt="logo"
-                />
+                <img width="152" height="36" src={Logo} alt="logo" />
               </Link>
             </div>
             <div>
@@ -38,13 +32,6 @@ export default function Footer() {
                     </span>
                   </Link>
                 </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Warranty
-                    </span>
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
@@ -57,7 +44,7 @@ export default function Footer() {
                 <li>
                   <Link to="/">
                     <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Rave’s Story
+                      Our Story
                     </span>
                   </Link>
                 </li>
@@ -65,20 +52,6 @@ export default function Footer() {
                   <Link to="/">
                     <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
                       Work With Us
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Coporate News
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Investors
                     </span>
                   </Link>
                 </li>
@@ -133,13 +106,6 @@ export default function Footer() {
                 <li>
                   <Link to="/">
                     <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Secure Payment
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
                       Privacy Policy
                     </span>
                   </Link>
@@ -151,13 +117,6 @@ export default function Footer() {
                     </span>
                   </Link>
                 </li>
-                <li>
-                  <Link to="/">
-                    <span className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack">
-                      Archived Products
-                    </span>
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
@@ -165,40 +124,35 @@ export default function Footer() {
         <div className="bottom-bar border-t border-qgray-border lg:h-[82px] lg:flex justify-between items-center">
           <div className="flex lg:space-x-5 justify-between items-center mb-3">
             <div className="flex space-x-5 items-center">
-              <a href="#">
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Instagram className="fill-current text-qgray hover:text-qblack" />
               </a>
-              <a href="#">
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Facebook className="fill-current text-qgray hover:text-qblack" />
               </a>
-              <a href="#">
+              <a
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Youtube className="fill-current text-qgray hover:text-qblack" />
               </a>
             </div>
             <span className="sm:text-base text-[10px] text-qgray font-300">
-              ©2022
-              <a
-                href="https://quomodosoft.com/"
-                target="_blank"
-                rel="noreferrer"
-                className="font-500 text-qblack mx-1"
-              >
-                Quomodosoft
+              ©2025
+              <a href="" className="font-500 text-qblack mx-1">
+                HealthPlus
               </a>
               All rights reserved
             </span>
-          </div>
-          <div className="">
-            <a href="#">
-              <img
-                width="318"
-                height="28"
-                src={`${
-                  import.meta.env.VITE_PUBLIC_URL
-                }/assets/images/payment-getways.png`}
-                alt="payment-getways"
-              />
-            </a>
           </div>
         </div>
       </div>

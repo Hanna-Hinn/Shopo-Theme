@@ -38,7 +38,7 @@ export default function WishlistTab({ className }) {
                     </div>
                     <div className="flex-1 flex flex-col">
                       <p className="font-medium text-[15px] text-qblack">
-                        iPhone 12 Pro Max 128GB
+                        Natural Immunity Boost Capsules
                       </p>
                     </div>
                   </div>
@@ -94,7 +94,7 @@ export default function WishlistTab({ className }) {
                     </div>
                     <div className="flex-1 flex flex-col">
                       <p className="font-medium text-[15px] text-qblack">
-                        iPhone 12 Pro Max 128GB
+                        Natural Immunity Boost Capsules
                       </p>
                     </div>
                   </div>
@@ -150,7 +150,7 @@ export default function WishlistTab({ className }) {
                     </div>
                     <div className="flex-1 flex flex-col">
                       <p className="font-medium text-[15px] text-qblack">
-                        iPhone 12 Pro Max 128GB
+                        Natural Immunity Boost Capsules
                       </p>
                     </div>
                   </div>

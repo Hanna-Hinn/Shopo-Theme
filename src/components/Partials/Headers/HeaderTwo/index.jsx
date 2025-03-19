@@ -3,7 +3,9 @@ import ThinBag from "../../../Helpers/icons/ThinBag";
 import Middlebar from "./Middlebar";
 import Navbar from "./Navbar";
 import TopBar from "./TopBar";
+import Logo from "../../../../assets/images/logo.png"
 
+// Mobile Header
 export default function HeaderTwo({ className, drawerAction }) {
   return (
     <header className={` ${className || ""} header-section-wrapper relative`}>
@@ -32,13 +34,12 @@ export default function HeaderTwo({ className, drawerAction }) {
               <img
                 width="152"
                 height="36"
-                src={`${
-                  import.meta.env.VITE_PUBLIC_URL
-                }/assets/images/logo-2.svg`}
+                src={Logo}
                 alt="logo"
               />
             </Link>
           </div>
+          {/* Mobile CART */}
           <div className="cart relative cursor-pointer">
             <Link to="/cart">
               <span>

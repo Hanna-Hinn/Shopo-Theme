@@ -23,7 +23,7 @@ export default function Cart({ className, type }) {
                   </div>
                   <div className="flex-1 h-full flex flex-col justify-center ">
                     <p className="title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600">
-                      iPhone 12 Pro Max 128GB Golen colour
+                      Natural Immunity Boost Capsules
                     </p>
 
                     <p className="price">
@@ -59,7 +59,7 @@ export default function Cart({ className, type }) {
                   </div>
                   <div className="flex-1 h-full flex flex-col justify-center ">
                     <p className="title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600">
-                      iPhone 12 Pro Max 128GB Golen colour
+                      Natural Immunity Boost Capsules
                     </p>
 
                     <p className="price">
@@ -95,7 +95,7 @@ export default function Cart({ className, type }) {
                   </div>
                   <div className="flex-1 h-full flex flex-col justify-center ">
                     <p className="title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600">
-                      iPhone 12 Pro Max 128GB Golen colour
+                      Natural Immunity Boost Capsules
                     </p>
 
                     <p className="price">
@@ -131,7 +131,7 @@ export default function Cart({ className, type }) {
                   </div>
                   <div className="flex-1 h-full flex flex-col justify-center ">
                     <p className="title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600">
-                      iPhone 12 Pro Max 128GB Golen colour
+                      Natural Immunity Boost Capsules
                     </p>
 
                     <p className="price">
@@ -167,7 +167,7 @@ export default function Cart({ className, type }) {
                   </div>
                   <div className="flex-1 h-full flex flex-col justify-center ">
                     <p className="title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600">
-                      iPhone 12 Pro Max 128GB Golen colour
+                      Natural Immunity Boost Capsules
                     </p>
 
                     <p className="price">
@@ -203,7 +203,7 @@ export default function Cart({ className, type }) {
                   </div>
                   <div className="flex-1 h-full flex flex-col justify-center ">
                     <p className="title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600">
-                      iPhone 12 Pro Max 128GB Golen colour
+                      Natural Immunity Boost Capsules
                     </p>
 
                     <p className="price">

@@ -40,7 +40,7 @@ export default function Signup() {
                 <div className="input-area">
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
                     <InputCom
-                      placeholder="Demo Name"
+                      placeholder="John"
                       label="Frist Name*"
                       name="fname"
                       type="text"
@@ -48,7 +48,7 @@ export default function Signup() {
                     />
 
                     <InputCom
-                      placeholder="Demo Name"
+                      placeholder="Doe"
                       label="Last Name*"
                       name="lname"
                       type="text"
@@ -57,7 +57,7 @@ export default function Signup() {
                   </div>
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
                     <InputCom
-                      placeholder="Demo@gmail.com"
+                      placeholder="John@Doe.com"
                       label="Email Address*"
                       name="email"
                       type="email"
@@ -65,7 +65,7 @@ export default function Signup() {
                     />
 
                     <InputCom
-                      placeholder="0213 *********"
+                      placeholder="+1234567890"
                       label="Phone*"
                       name="phone"
                       type="text"
@@ -109,33 +109,18 @@ export default function Signup() {
                   </div>
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
                     <div className="w-1/2">
-                      <h6 className="input-label text-qgray capitalize text-[13px] font-normal block mb-2 ">
-                        Town / City*
-                      </h6>
-                      <div className="w-full h-[50px] border border-[#EDEDED] px-5 flex justify-between items-center mb-2">
-                        <span className="text-[13px] text-qgraytwo">
-                          Maiyami
-                        </span>
-                        <span>
-                          <svg
-                            width="11"
-                            height="7"
-                            viewBox="0 0 11 7"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M5.4 6.8L0 1.4L1.4 0L5.4 4L9.4 0L10.8 1.4L5.4 6.8Z"
-                              fill="#222222"
-                            />
-                          </svg>
-                        </span>
-                      </div>
+                      <InputCom
+                        placeholder="Your City Here"
+                        label="City"
+                        name="address"
+                        type="text"
+                        inputClasses="h-[50px]"
+                      />
                     </div>
                     <div className="flex-1">
                       <div className="w-full h-[50px] mb-5 sm:mb-0">
                         <InputCom
-                          label="Postcode / ZIP*"
+                          label="Postcode / ZIP"
                           inputClasses="w-full h-full"
                           type="text"
                           placeholder="00000"
@@ -143,8 +128,8 @@ export default function Signup() {
                       </div>
                     </div>
                   </div>
-                  <div className="forgot-password-area mb-7">
-                    <div className="remember-checkbox flex items-center space-x-2.5">
+                  <div className="forgot-password-area mt-10">
+                    <div className="remember-checkbox flex items-center space-x-4">
                       <button
                         onClick={rememberMe}
                         type="button"
@@ -169,9 +154,7 @@ export default function Signup() {
                         onClick={rememberMe}
                         className="text-base text-black"
                       >
-                        I agree all
-                        <span className="text-qblack">tarm and condition</span>
-                        in BigShop.
+                        {"I Agree All Terms and Conditions"}
                       </span>
                     </div>
                   </div>

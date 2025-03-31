@@ -35,22 +35,6 @@ export default function CardPage({ cart = true }) {
           <div className="w-full mt-[23px]">
             <div className="container-x mx-auto">
               <ProductsTable className="mb-[30px]" />
-              <div className="w-full sm:flex justify-between">
-                <div className="flex space-x-2.5 items-center">
-                  <a href="#">
-                    <div className="w-[220px] h-[50px] bg-[#F6F6F6] flex justify-center items-center">
-                      <span className="text-sm font-semibold">
-                        Continue Shopping
-                      </span>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div className="w-[140px] h-[50px] bg-[#F6F6F6] flex justify-center items-center">
-                      <span className="text-sm font-semibold">Update Cart</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
               <div className="w-full mt-[30px] flex sm:justify-end">
                 <div className="sm:w-[370px] w-full border border-[#EDEDED] px-[30px] py-[26px]">
                   <div className="sub-total mb-6">

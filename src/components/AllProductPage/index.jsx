@@ -4,50 +4,50 @@ import BreadcrumbCom from "../BreadcrumbCom";
 import ProductCardStyleOne from "../Helpers/Cards/ProductCardStyleOne";
 import DataIteration from "../Helpers/DataIteration";
 import Layout from "../Partials/Layout";
-import ProductsFilter from "./ProductsFilter";
+// import ProductsFilter from "./ProductsFilter";
 
 export default function AllProductPage() {
-  const [filters, setFilter] = useState({
-    mobileLaptop: false,
-    gaming: false,
-    imageVideo: false,
-    vehicles: false,
-    furnitures: false,
-    sport: false,
-    foodDrinks: false,
-    fashion: false,
-    toilet: false,
-    makeupCorner: false,
-    babyItem: false,
-    apple: false,
-    samsung: false,
-    walton: false,
-    oneplus: false,
-    vivo: false,
-    oppo: false,
-    xiomi: false,
-    others: false,
-    sizeS: false,
-    sizeM: false,
-    sizeL: false,
-    sizeXL: false,
-    sizeXXL: false,
-    sizeFit: false,
-  });
+  // const [filters, setFilter] = useState({
+  //   mobileLaptop: false,
+  //   gaming: false,
+  //   imageVideo: false,
+  //   vehicles: false,
+  //   furnitures: false,
+  //   sport: false,
+  //   foodDrinks: false,
+  //   fashion: false,
+  //   toilet: false,
+  //   makeupCorner: false,
+  //   babyItem: false,
+  //   apple: false,
+  //   samsung: false,
+  //   walton: false,
+  //   oneplus: false,
+  //   vivo: false,
+  //   oppo: false,
+  //   xiomi: false,
+  //   others: false,
+  //   sizeS: false,
+  //   sizeM: false,
+  //   sizeL: false,
+  //   sizeXL: false,
+  //   sizeXXL: false,
+  //   sizeFit: false,
+  // });
 
-  const checkboxHandler = (e) => {
-    const { name } = e.target;
-    setFilter((prevState) => ({
-      ...prevState,
-      [name]: !prevState[name],
-    }));
-  };
-  const [volume, setVolume] = useState({ min: 200, max: 500 });
+  // const checkboxHandler = (e) => {
+  //   const { name } = e.target;
+  //   setFilter((prevState) => ({
+  //     ...prevState,
+  //     [name]: !prevState[name],
+  //   }));
+  // };
+  // const [volume, setVolume] = useState({ min: 200, max: 500 });
 
-  const [storage, setStorage] = useState(null);
-  const filterStorage = (value) => {
-    setStorage(value);
-  };
+  // const [storage, setStorage] = useState(null);
+  // const filterStorage = (value) => {
+  //   setStorage(value);
+  // };
   const [filterToggle, setToggle] = useState(false);
 
   const { products } = productDatas;
@@ -60,7 +60,7 @@ export default function AllProductPage() {
             <BreadcrumbCom />
             <div className="w-full lg:flex lg:space-x-[30px]">
               <div className="lg:w-[270px]">
-                <ProductsFilter
+                {/* <ProductsFilter
                   filterToggle={filterToggle}
                   filterToggleHandler={() => setToggle(!filterToggle)}
                   filters={filters}
@@ -70,7 +70,7 @@ export default function AllProductPage() {
                   storage={storage}
                   filterstorage={filterStorage}
                   className="mb-[30px]"
-                />
+                /> */}
                 {/* ads */}
                 <div className="w-full hidden lg:block h-[295px]">
                   <img

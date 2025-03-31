@@ -1,7 +1,5 @@
-import React from "react";
 import QuickViewIco from "../icons/QuickViewIco";
 import ThinLove from "../icons/ThinLove";
-import Compair from "../icons/Compair";
 
 function ProductCardStyleThree({ datas }) {
   return (
@@ -23,11 +21,6 @@ function ProductCardStyleThree({ datas }) {
           <a href="#">
             <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
               <ThinLove />
-            </span>
-          </a>
-          <a href="#">
-            <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-              <Compair />
             </span>
           </a>
         </div>
@@ -55,7 +48,7 @@ function ProductCardStyleThree({ datas }) {
         </div>
       </div>
       <h2 className="text-xl leading-6 font-medium text-qblack mb-2">
-        Women's Shirt Dress
+        {"Women's Shirt Dress"}
       </h2>
       <p className="text-base leading-6 font-medium text-qgraytwo">
         $9.99 <span className="text-qred">$6.99</span>{" "}

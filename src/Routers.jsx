@@ -13,7 +13,6 @@ import FlashSale from "./components/FlashSale";
 import FourZeroFour from "./components/FourZeroFour";
 import HomeTwo from "./components/HomeTwo";
 import PrivacyPolicy from "./components/PrivacyPolicy";
-import ProductsCompaire from "./components/ProductsCompaire/index";
 import SallerPage from "./components/SallerPage";
 import Sallers from "./components/Sellers";
 import SingleProductPage from "./components/SingleProductPage";
@@ -30,7 +29,6 @@ const router = createBrowserRouter([
   { path: "/wishlist", element: <Wishlist /> },
   { path: "/flash-sale", element: <FlashSale /> },
   { path: "/saller-page", element: <SallerPage /> },
-  { path: "/products-compaire", element: <ProductsCompaire /> },
   { path: "/sallers", element: <Sallers /> },
   { path: "/about", element: <About /> },
   { path: "/tracking-order", element: <TrackingOrder /> },

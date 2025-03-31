@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Compair from "../icons/Compair";
 import QuickViewIco from "../icons/QuickViewIco";
 import Star from "../icons/Star";
 import ThinLove from "../icons/ThinLove";
@@ -115,11 +114,6 @@ export default function ProductCardStyleOne({ datas, type }) {
         <a href="#">
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <ThinLove />
-          </span>
-        </a>
-        <a href="#">
-          <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-            <Compair />
           </span>
         </a>
       </div>

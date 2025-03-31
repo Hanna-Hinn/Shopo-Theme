@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Compair from "../../Helpers/icons/Compair";
 import ThinLove from "../../Helpers/icons/ThinLove";
 import { Link } from "react-router-dom";
 
@@ -26,16 +25,6 @@ export default function Drawer({ className, open, action }) {
           <div className="w-full px-5 mt-5 mb-4">
             <div className="flex justify-between items-center">
               <div className="flex space-x-5 items-center">
-                <div className="compaire relative">
-                  <Link to="/products-compaire">
-                    <span>
-                      <Compair />
-                    </span>
-                  </Link>
-                  <span className="w-[18px] h-[18px] rounded-full bg-qh2-green absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px]">
-                    2
-                  </span>
-                </div>
                 <div className="favorite relative">
                   <Link to="/wishlist">
                     <span>

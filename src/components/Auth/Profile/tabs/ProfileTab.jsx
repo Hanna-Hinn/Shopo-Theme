@@ -1,6 +1,70 @@
+import { useEffect, useState } from "react";
 import InputCom from "../../../Helpers/InputCom";
+import { UserApi } from "../../../../api/auth/user"; // Replace with actual user API function
+import { updateUser } from "../../../../api/auth/user"; // Assuming this is for updating user data
 
 export default function ProfileTab() {
+  const [user, setUser] = useState(null);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobile: "",
+  });
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        const payload = token.split(".")[1];
+        const decodedPayload = atob(payload);
+        const decodedPayloadObject = JSON.parse(decodedPayload);
+
+        console.log(decodedPayloadObject?.id); // Log the user ID
+        const { data: userDetails } = await UserApi(decodedPayloadObject?.id); // Fetch user info
+        setUser(userDetails);
+        setFormData({
+          firstName: userDetails.firstName || "",
+          lastName: userDetails.lastName || "",
+          email: userDetails.email || "",
+          mobile: userDetails.mobile || "",
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdateProfile = async () => {
+    try {
+      // Add _id to the payload
+      const token = localStorage.getItem("token");
+
+      const payload = { ...formData, _id: user?._id };
+
+      console.log("Updating profile with data:", payload); // Log formData for debugging
+      const response = await updateUser(user?._id, token, payload); // Make API call to update user
+      console.log("Profile updated successfully!", response);
+    } catch (error) {
+      console.error(
+        "Error updating profile:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
   return (
     <>
       <div className="flex-1">
@@ -12,13 +76,16 @@ export default function ProfileTab() {
       </div>
 
       <div className="flex space-x-8">
-        <div className="w-[570px] ">
+        <div className="w-[570px]">
           <div className="input-item flex space-x-2.5 mb-8">
             <div className="w-1/2 h-full">
               <InputCom
                 label="First Name*"
                 placeholder="Demo Name"
                 type="text"
+                name="firstName"
+                value={formData.firstName}
+                inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"
               />
             </div>
@@ -27,6 +94,9 @@ export default function ProfileTab() {
                 label="Last Name*"
                 placeholder="Demo Name"
                 type="text"
+                name="lastName"
+                value={formData.lastName}
+                inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"
               />
             </div>
@@ -37,6 +107,9 @@ export default function ProfileTab() {
                 label="Email*"
                 placeholder="demoemial@gmail.com"
                 type="email"
+                name="email"
+                value={formData.email}
+                inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"
               />
             </div>
@@ -45,56 +118,23 @@ export default function ProfileTab() {
                 label="Phone Number*"
                 placeholder="012 3  *******"
                 type="text"
-                inputClasses="h-[50px]"
-              />
-            </div>
-          </div>
-          <div className="input-item mb-8">
-            <div className="w-full">
-              <InputCom
-                label="Country*"
-                placeholder="country"
-                type="text"
-                inputClasses="h-[50px]"
-              />
-            </div>
-          </div>
-          <div className="input-item mb-8">
-            <div className="w-full">
-              <InputCom
-                label="Address*"
-                placeholder="your address here"
-                type="text"
-                inputClasses="h-[50px]"
-              />
-            </div>
-          </div>
-          <div className="input-item flex space-x-2.5 mb-8">
-            <div className="w-1/2 h-full">
-              <InputCom
-                label="Town / City*"
-                placeholder=""
-                type="text"
-                inputClasses="h-[50px]"
-              />
-            </div>
-            <div className="w-1/2 h-full">
-              <InputCom
-                label="Postcode / ZIP*"
-                placeholder=""
-                type="text"
+                name="mobile"
+                value={formData.mobile}
+                inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"
               />
             </div>
           </div>
         </div>
       </div>
+
       <div className="action-area flex space-x-4 items-center">
         <button type="button" className="text-sm text-qred font-semibold">
           Cancel
         </button>
         <button
           type="button"
+          onClick={handleUpdateProfile}
           className="w-[164px] h-[50px] bg-qblack text-white text-sm"
         >
           Update Profile

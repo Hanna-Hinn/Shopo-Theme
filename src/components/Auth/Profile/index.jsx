@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import BreadcrumbCom from "../../BreadcrumbCom";
 import Layout from "../../Partials/Layout";
 import IcoAdress from "./icons/IcoAdress";
@@ -19,6 +19,10 @@ import ProfileTab from "./tabs/ProfileTab";
 import WishlistTab from "./tabs/WishlistTab";
 
 export default function Profile() {
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove the token from storage
+  };
+
   const location = useLocation();
   const getHashContent = location.hash.split("#");
   const [active, setActive] = useState("dashboard");
@@ -29,6 +33,17 @@ export default function Profile() {
         : "dashboard"
     );
   }, [getHashContent]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+
   return (
     <Layout childrenClasses="pt-0 pb-0">
       <div className="profile-page-wrapper w-full">
@@ -133,7 +148,7 @@ export default function Profile() {
                       </Link>
                     </div>
                     <div className="item group">
-                      <Link to="/">
+                      <Link to="/" onClick={() => handleLogout()}>
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
                           <span>
                             <IcoLogout />

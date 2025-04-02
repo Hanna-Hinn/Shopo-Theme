@@ -1,218 +1,118 @@
-import React from "react";
+import { useEffect, useState } from "react";
+
+import { UserApi } from "../../../../api/auth/user";
 
 export default function OrderTab() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserOrders = async (id) => {
+      try {
+        const { data: userDetails } = await UserApi(id);
+        if (userDetails && userDetails.orders) {
+          setOrders(userDetails.orders);
+        } else {
+          setError("No orders found");
+        }
+      } catch (err) {
+        setError("Error fetching user data");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.log("No token found");
+      return;
+    }
+
+    try {
+      const payload = token.split(".")[1];
+      const decodedPayload = atob(payload);
+      const decodedPayloadObject = JSON.parse(decodedPayload);
+
+      fetchUserOrders(decodedPayloadObject?.id);
+    } catch (error) {
+      console.error("Error decoding token:", error);
+    }
+  }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "short", day: "2-digit" };
+    return date.toLocaleDateString("en-US", options);
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (orders.length === 0) {
+    return <div>No orders found.</div>;
+  }
+
   return (
     <>
       <div className="relative w-full overflow-x-auto sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <tbody>
-            {/* table heading */}
-            <tr className="text-base text-qgray whitespace-nowrap px-2 border-b default-border-bottom ">
-              <td className="py-4 block whitespace-nowrap text-center">
-                Order
-              </td>
+            {/* Table Heading */}
+            <tr className="text-base text-qgray whitespace-nowrap px-2 border-b default-border-bottom">
+              <td className="py-4 block whitespace-nowrap text-center">Order</td>
               <td className="py-4 whitespace-nowrap text-center">Date</td>
               <td className="py-4 whitespace-nowrap text-center">Status</td>
               <td className="py-4 whitespace-nowrap text-center">Amount</td>
-              <td className="py-4 whitespace-nowrap  text-center">Action</td>
+              <td className="py-4 whitespace-nowrap text-center">Action</td>
             </tr>
-            {/* table heading end */}
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="text-center py-4">
-                <span className="text-lg text-qgray font-medium">#354</span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qgray  whitespace-nowrap">
-                  Fub 05,2021
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                  Complated
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                  $757
-                </span>
-              </td>
-              <td className="text-center py-4">
-                <button
-                  type="button"
-                  className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="text-center py-4">
-                <span className="text-lg text-qgray font-medium">#354</span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qgray  whitespace-nowrap">
-                  Fub 05,2021
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                  Complated
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                  $757
-                </span>
-              </td>
-              <td className="text-center py-4">
-                <button
-                  type="button"
-                  className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="text-center py-4">
-                <span className="text-lg text-qgray font-medium">#354</span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qgray  whitespace-nowrap">
-                  Fub 05,2021
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                  Complated
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                  $757
-                </span>
-              </td>
-              <td className="text-center py-4">
-                <button
-                  type="button"
-                  className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="text-center py-4">
-                <span className="text-lg text-qgray font-medium">#354</span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qgray  whitespace-nowrap">
-                  Fub 05,2021
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                  Complated
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                  $757
-                </span>
-              </td>
-              <td className="text-center py-4">
-                <button
-                  type="button"
-                  className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="text-center py-4">
-                <span className="text-lg text-qgray font-medium">#354</span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qgray  whitespace-nowrap">
-                  Fub 05,2021
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                  Complated
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                  $757
-                </span>
-              </td>
-              <td className="text-center py-4">
-                <button
-                  type="button"
-                  className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="text-center py-4">
-                <span className="text-lg text-qgray font-medium">#354</span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qgray  whitespace-nowrap">
-                  Fub 05,2021
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                  Complated
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                  $757
-                </span>
-              </td>
-              <td className="text-center py-4">
-                <button
-                  type="button"
-                  className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="text-center py-4">
-                <span className="text-lg text-qgray font-medium">#354</span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qgray  whitespace-nowrap">
-                  Fub 05,2021
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                  Complated
-                </span>
-              </td>
-              <td className="text-center py-4 px-2">
-                <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                  $757
-                </span>
-              </td>
-              <td className="text-center py-4">
-                <button
-                  type="button"
-                  className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
+            {/* Table Heading End */}
+
+            {orders.map((order) => (
+              <tr key={order.id} className="bg-white border-b hover:bg-gray-50">
+                <td className="text-center py-4">
+                  <span className="text-lg text-qgray font-medium">#{order.id}</span>
+                </td>
+                <td className="text-center py-4 px-2">
+                  <span className="text-base text-qgray whitespace-nowrap">
+                    {formatDate(order.date)}
+                  </span>
+                </td>
+                <td className="text-center py-4 px-2">
+                  <span
+                    className={`text-sm rounded ${
+                      order.shipmentStatus === "delivered"
+                        ? "text-green-500 bg-green-100"
+                        : order.shipmentStatus === "pending"
+                        ? "text-yellow-500 bg-yellow-100"
+                        : "text-blue-500 bg-blue-100"
+                    } p-2`}
+                  >
+                    {order.shipmentStatus}
+                  </span>
+                </td>
+                <td className="text-center py-4 px-2">
+                  <span className="text-base text-qblack whitespace-nowrap px-2">
+                    {order.totalPrice}
+                  </span>
+                </td>
+                <td className="text-center py-4">
+                  <button
+                    type="button"
+                    className="w-[116px] h-[46px] bg-qyellow text-qblack font-bold"
+                  >
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

@@ -21,6 +21,7 @@ export default function InputCom({
       )}
       <div className="input-wrapper border border-qgray-border w-full h-full overflow-hidden relative ">
         <input
+          name={name}
           placeholder={placeholder}
           value={value}
           onChange={inputHandler}

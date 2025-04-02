@@ -1,14 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputCom from "../../Helpers/InputCom";
 import Layout from "../../Partials/Layout";
 import Thumbnail from "./Thumbnail";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
+import { LoginApi } from "../../../api/auth/login";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [checked, setValue] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token) {
+      enqueueSnackbar("You are already logged in.", { variant: "warning" });
+      navigate("/"); // Redirect to homepage if a token exists
+    }
+  }, [navigate]);
+
   const rememberMe = () => {
     setValue(!checked);
   };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data: res } = await LoginApi({ email, password });
+
+      localStorage.setItem("token", res.data);
+      enqueueSnackbar(res.message || "Welcome Back!", { variant: "success" });
+
+      // Navigate to dashboard or another protected route
+      navigate("/");
+    } catch (err) {
+      enqueueSnackbar(
+        err.response?.data?.message || "Login failed. Please try again.",
+        { variant: "error" }
+      );
+    }
+  };
+
   return (
     <Layout childrenClasses="pt-0 pb-0">
       <div className="login-page-wrapper w-full py-10">
@@ -35,7 +70,13 @@ export default function Login() {
                     </svg>
                   </div>
                 </div>
-                <div className="input-area">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleLogin(e);
+                  }}
+                  className="input-area"
+                >
                   <div className="input-item mb-5">
                     <InputCom
                       placeholder="example@quomodosoft.com"
@@ -43,6 +84,9 @@ export default function Login() {
                       name="email"
                       type="email"
                       inputClasses="h-[50px]"
+                      value={email}
+                      inputHandler={(e) => setEmail(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="input-item mb-5">
@@ -52,6 +96,9 @@ export default function Login() {
                       name="password"
                       type="password"
                       inputClasses="h-[50px]"
+                      value={password}
+                      inputHandler={(e) => setPassword(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="forgot-password-area flex justify-between items-center mb-7">
@@ -93,7 +140,7 @@ export default function Login() {
                   <div className="signin-area mb-3.5">
                     <div className="flex justify-center">
                       <button
-                        type="button"
+                        type="submit"
                         className="black-btn mb-6 text-sm text-white w-full h-[50px] font-semibold flex justify-center bg-purple items-center"
                       >
                         <span>Log In</span>
@@ -108,7 +155,7 @@ export default function Login() {
                       </Link>
                     </p>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
             <div className="flex-1 lg:flex hidden transform scale-60 xl:scale-100   xl:justify-center ">

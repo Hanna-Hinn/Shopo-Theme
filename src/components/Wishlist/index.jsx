@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import {useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
+
 import BreadcrumbCom from "../BreadcrumbCom";
 import EmptyWishlistError from "../EmptyWishlistError";
 import PageTitle from "../Helpers/PageTitle";
@@ -5,6 +9,20 @@ import Layout from "../Partials/Layout";
 import ProductsTable from "./ProductsTable";
 
 export default function Wishlist({ wishlist = true }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      // If no token, show a snackbar and redirect to login page
+      enqueueSnackbar("Not logged in. Please log in to continue.", {
+        variant: "warning",
+      });
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+
   return (
     <Layout childrenClasses={wishlist ? "pt-0 pb-0" : ""}>
       {wishlist === false ? (

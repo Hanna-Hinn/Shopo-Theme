@@ -1,12 +1,28 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import BreadcrumbCom from "../BreadcrumbCom";
 import EmptyCardError from "../EmptyCardError";
 import InputCom from "../Helpers/InputCom";
 import PageTitle from "../Helpers/PageTitle";
 import Layout from "../Partials/Layout";
 import ProductsTable from "./ProductsTable";
-
+import { enqueueSnackbar } from "notistack";
 export default function CardPage({ cart = true }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      // If no token, show a snackbar and redirect to login page
+      enqueueSnackbar("Not logged in. Please log in to continue.", {
+        variant: "warning",
+      });
+      navigate("/login"); // Redirect to login page
+    }
+  }, [navigate]);
+
   return (
     <Layout childrenClasses={cart ? "pt-0 pb-0" : ""}>
       {cart === false ? (

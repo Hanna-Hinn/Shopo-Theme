@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Arrow from "../../../Helpers/icons/Arrow";
 import Selectbox from "../../../Helpers/Selectbox";
@@ -6,8 +6,8 @@ import ArabicFlag from "../../../../assets/images/UAE-flag.png";
 import EnglishFlag from "../../../../assets/images/united-states.png";
 
 export default function TopBar({ className }) {
-  // Track the currently selected country
   const [selectedCountry, setSelectedCountry] = useState("United State");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
   // Determine which flag to show based on selection
   const flagSrc = selectedCountry === "United State" ? EnglishFlag : ArabicFlag;
@@ -16,6 +16,12 @@ export default function TopBar({ className }) {
   const handleCountryChange = (value) => {
     setSelectedCountry(value);
   };
+
+  // Check if the user is logged in (based on token) when the component mounts
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); // Set the login state based on token presence
+  }, []);
 
   return (
     <div
@@ -29,9 +35,10 @@ export default function TopBar({ className }) {
           <div className="topbar-nav">
             <ul className="flex space-x-6">
               <li>
-                <Link to="/profile">
+                {/* Show "Login" if not logged in, otherwise "Account" */}
+                <Link to={isLoggedIn ? "/profile" : "/login"}>
                   <span className="text-xs leading-6 text-qblack font-500">
-                    Account
+                    {isLoggedIn ? "Account" : "Login"}
                   </span>
                 </Link>
               </li>

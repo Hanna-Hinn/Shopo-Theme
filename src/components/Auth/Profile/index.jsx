@@ -40,7 +40,8 @@ export default function Profile() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/login"); // Redirect to login page
+      enqueueSnackbar( "Please Login to View Profile", { variant : "warning" } );
+      navigate("/login"); // Redirect to login page 
     }
   }, [navigate]);
 

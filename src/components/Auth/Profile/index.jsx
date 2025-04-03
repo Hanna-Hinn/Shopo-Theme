@@ -17,6 +17,7 @@ import PasswordTab from "./tabs/PasswordTab";
 import Payment from "./tabs/Payment";
 import ProfileTab from "./tabs/ProfileTab";
 import WishlistTab from "./tabs/WishlistTab";
+import { enqueueSnackbar } from "notistack";
 
 export default function Profile() {
   const handleLogout = () => {
@@ -41,7 +42,7 @@ export default function Profile() {
 
     if (!token) {
       enqueueSnackbar( "Please Login to View Profile", { variant : "warning" } );
-      navigate("/login"); // Redirect to login page 
+      navigate("/login"); 
     }
   }, [navigate]);
 

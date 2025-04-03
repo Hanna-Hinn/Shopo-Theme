@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import InputCom from "../../../Helpers/InputCom"; // Your existing input component
+import InputCom from "../../../Helpers/InputCom";
 import { UserApi, updateUser } from "../../../../api/auth/user";
 import { enqueueSnackbar } from "notistack";
 

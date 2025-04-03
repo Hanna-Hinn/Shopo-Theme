@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import InputCom from "../../../Helpers/InputCom"; // Your existing input component
 import { UserApi, updateUser } from "../../../../api/auth/user";
+import { enqueueSnackbar } from "notistack";
 
 export default function AddressesTab() {
   const [user, setUser] = useState(null);
@@ -18,7 +19,8 @@ export default function AddressesTab() {
         const { data: userDetails } = await UserApi(id);
         setUser(userDetails);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        enqueueSnackbar( "Something went wrong while fetching the user details , Please try again later!", { variant : "error" } );  
+
       }
     };
 
@@ -31,7 +33,8 @@ export default function AddressesTab() {
       const decodedPayloadObject = JSON.parse(decodedPayload);
       fetchUser(decodedPayloadObject?.id);
     } catch (error) {
-      console.error("Error decoding token:", error);
+      enqueueSnackbar( "Something went wrong while fetching the user details , Please try again later!", { variant : "error" } );  
+
     }
   }, []);
 
@@ -42,35 +45,32 @@ export default function AddressesTab() {
 
   const handleAddAddress = async () => {
     if (!user) return;
-    const token = localStorage.getItem("token");
 
     try {
       const updatedAddresses = [...(user.addresses || []), addressData];
       const updatedUser = { ...user, addresses: updatedAddresses };
 
-      await updateUser(user._id, token, updatedUser);
+      await updateUser(user._id, updatedUser);
 
       setUser(updatedUser);
       setAddressData({ street: "", city: "", state: "", postalCode: "" });
       setIsModalOpen(false);
     } catch (error) {
-      console.error("Error adding address:", error);
+      enqueueSnackbar( "Something went wrong while Updating the user details , Please try again later!", { variant : "error" } );  
     }
   };
 
   const handleRemoveAddress = async (index) => {
-    if (!user) return;
-    const token = localStorage.getItem("token");
 
     try {
       const updatedAddresses = user.addresses.filter((_, i) => i !== index);
       const updatedUser = { ...user, addresses: updatedAddresses };
 
-      await updateUser(user._id, token, updatedUser);
+      await updateUser(user._id, updatedUser);
 
       setUser(updatedUser);
     } catch (error) {
-      console.error("Error removing address:", error);
+      enqueueSnackbar( "Something went wrong while Removing the address, Please try again later!", { variant : "error" } ); 
     }
   };
 
@@ -155,6 +155,7 @@ export default function AddressesTab() {
                 placeholder="Enter street"
                 type="text"
                 name="street"
+                id="street"
                 value={addressData.street}
                 inputHandler={handleInputChange}
                 inputClasses="h-[50px]"
@@ -164,6 +165,7 @@ export default function AddressesTab() {
                 placeholder="Enter city"
                 type="text"
                 name="city"
+                id="city" 
                 value={addressData.city}
                 inputHandler={handleInputChange}
                 inputClasses="h-[50px]"
@@ -173,6 +175,7 @@ export default function AddressesTab() {
                 placeholder="Enter state"
                 type="text"
                 name="state"
+                id="state"
                 value={addressData.state}
                 inputHandler={handleInputChange}
                 inputClasses="h-[50px]"
@@ -182,6 +185,7 @@ export default function AddressesTab() {
                 placeholder="Enter postal code"
                 type="text"
                 name="postalCode"
+                id="postalCode"
                 value={addressData.postalCode}
                 inputHandler={handleInputChange}
                 inputClasses="h-[50px]"

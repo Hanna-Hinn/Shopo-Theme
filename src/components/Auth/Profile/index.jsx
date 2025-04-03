@@ -83,7 +83,7 @@ export default function Profile() {
                             <IcoPeople />
                           </span>
                           <span className=" font-normal text-base">
-                            Parsonal Info
+                            Personal Info
                           </span>
                         </div>
                       </Link>

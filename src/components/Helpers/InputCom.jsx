@@ -1,14 +1,15 @@
 export default function InputCom({
-  label,
-  type,
-  name,
-  placeholder,
-  children,
-  inputHandler,
-  value,
-  inputClasses,
-  labelClasses = "text-qgray text-[13px] font-normal",
-}) {
+  label,  
+  type,  
+  name, 
+  id,  
+  placeholder,  
+  children,  
+  inputHandler,  
+  value,  
+  inputClasses,  
+  labelClasses = "text-qgray text-[13px] font-normal",  
+})   {
   return (
     <div className="input-com w-full h-full">
       {label && (
@@ -29,7 +30,7 @@ export default function InputCom({
             inputClasses || ""
           }`}
           type={type}
-          id={name}
+          id={id || name}  
         />
         {children && children}
       </div>

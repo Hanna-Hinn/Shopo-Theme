@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { enqueueSnackbar } from "notistack";
 import { UserApi } from "../../../../api/auth/user";
 
 export default function OrderTab() {
@@ -18,7 +18,9 @@ export default function OrderTab() {
         }
       } catch (err) {
         setError("Error fetching user data");
-        console.error(err);
+        enqueueSnackbar("Something went wrong, Please try again later!", {
+          variant: "error",
+        });
       } finally {
         setLoading(false);
       }
@@ -38,7 +40,7 @@ export default function OrderTab() {
 
       fetchUserOrders(decodedPayloadObject?.id);
     } catch (error) {
-      console.error("Error decoding token:", error);
+      enqueueSnackbar( "Something went wrong, Please try again later!", { variant : "error" } );  
     }
   }, []);
 
@@ -52,13 +54,10 @@ export default function OrderTab() {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  if (orders.length === 0) {
+  if (error || orders.length === 0 ) {
     return <div>No orders found.</div>;
   }
+
 
   return (
     <>
@@ -67,7 +66,9 @@ export default function OrderTab() {
           <tbody>
             {/* Table Heading */}
             <tr className="text-base text-qgray whitespace-nowrap px-2 border-b default-border-bottom">
-              <td className="py-4 block whitespace-nowrap text-center">Order</td>
+              <td className="py-4 block whitespace-nowrap text-center">
+                Order
+              </td>
               <td className="py-4 whitespace-nowrap text-center">Date</td>
               <td className="py-4 whitespace-nowrap text-center">Status</td>
               <td className="py-4 whitespace-nowrap text-center">Amount</td>
@@ -78,7 +79,9 @@ export default function OrderTab() {
             {orders.map((order) => (
               <tr key={order.id} className="bg-white border-b hover:bg-gray-50">
                 <td className="text-center py-4">
-                  <span className="text-lg text-qgray font-medium">#{order.id}</span>
+                  <span className="text-lg text-qgray font-medium">
+                    #{order.id}
+                  </span>
                 </td>
                 <td className="text-center py-4 px-2">
                   <span className="text-base text-qgray whitespace-nowrap">

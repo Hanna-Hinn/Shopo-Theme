@@ -37,10 +37,7 @@ export default function Login() {
       // Navigate to dashboard or another protected route
       navigate("/");
     } catch (err) {
-      enqueueSnackbar(
-        err.response?.data?.message || "Login failed. Please try again.",
-        { variant: "error" }
-      );
+      enqueueSnackbar("Login failed. Please try again.", { variant: "error" });
     }
   };
 
@@ -70,18 +67,13 @@ export default function Login() {
                     </svg>
                   </div>
                 </div>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleLogin(e);
-                  }}
-                  className="input-area"
-                >
+                <form onSubmit={handleLogin} className="input-area">
                   <div className="input-item mb-5">
                     <InputCom
                       placeholder="example@quomodosoft.com"
                       label="Email Address*"
                       name="email"
+                      id="email" 
                       type="email"
                       inputClasses="h-[50px]"
                       value={email}
@@ -94,6 +86,7 @@ export default function Login() {
                       placeholder="● ● ● ● ● ●"
                       label="Password*"
                       name="password"
+                      id="password" 
                       type="password"
                       inputClasses="h-[50px]"
                       value={password}

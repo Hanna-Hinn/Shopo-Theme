@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import InputCom from "../../../Helpers/InputCom";
 import { UserApi } from "../../../../api/auth/user"; // Replace with actual user API function
 import { updateUser } from "../../../../api/auth/user"; // Assuming this is for updating user data
+import { enqueueSnackbar } from "notistack";
 
 export default function ProfileTab() {
   const [user, setUser] = useState(null);
@@ -21,8 +22,6 @@ export default function ProfileTab() {
         const payload = token.split(".")[1];
         const decodedPayload = atob(payload);
         const decodedPayloadObject = JSON.parse(decodedPayload);
-
-        console.log(decodedPayloadObject?.id); // Log the user ID
         const { data: userDetails } = await UserApi(decodedPayloadObject?.id); // Fetch user info
         setUser(userDetails);
         setFormData({
@@ -32,7 +31,8 @@ export default function ProfileTab() {
           mobile: userDetails.mobile || "",
         });
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        enqueueSnackbar( "Something went wrong, Please try again later!", { variant : "error" } );  
+
       }
     };
 
@@ -50,18 +50,13 @@ export default function ProfileTab() {
   const handleUpdateProfile = async () => {
     try {
       // Add _id to the payload
-      const token = localStorage.getItem("token");
 
       const payload = { ...formData, _id: user?._id };
 
-      console.log("Updating profile with data:", payload); // Log formData for debugging
-      const response = await updateUser(user?._id, token, payload); // Make API call to update user
-      console.log("Profile updated successfully!", response);
+      await updateUser(user?._id, payload);  // Make API call to update user
     } catch (error) {
-      console.error(
-        "Error updating profile:",
-        error.response ? error.response.data : error.message
-      );
+      enqueueSnackbar( "Something went wrong, Please try again later!", { variant : "error" } );  
+
     }
   };
 
@@ -84,6 +79,7 @@ export default function ProfileTab() {
                 placeholder="Demo Name"
                 type="text"
                 name="firstName"
+                id="firstName" 
                 value={formData.firstName}
                 inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"
@@ -95,6 +91,7 @@ export default function ProfileTab() {
                 placeholder="Demo Name"
                 type="text"
                 name="lastName"
+                id="lastName"
                 value={formData.lastName}
                 inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"
@@ -108,6 +105,7 @@ export default function ProfileTab() {
                 placeholder="demoemial@gmail.com"
                 type="email"
                 name="email"
+                id="email"
                 value={formData.email}
                 inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"
@@ -119,6 +117,7 @@ export default function ProfileTab() {
                 placeholder="012 3  *******"
                 type="text"
                 name="mobile"
+                id="mobile"  
                 value={formData.mobile}
                 inputHandler={handleInputChange} // Correct prop name should be inputHandler
                 inputClasses="h-[50px]"

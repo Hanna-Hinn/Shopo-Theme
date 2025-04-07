@@ -18,8 +18,13 @@ export default function Dashboard() {
     };
 
     const token = localStorage.getItem("token");
-
-
+    
+    if (!token) {
+      enqueueSnackbar("Something went wrong, Please try again later!", {
+        variant: "error",
+      });
+      return;
+    }
 
     try {
       const payload = token.split(".")[1];
@@ -27,7 +32,11 @@ export default function Dashboard() {
       const decodedPayloadObject = JSON.parse(decodedPayload);
 
       fetchUser(decodedPayloadObject?.id);
-    } catch (error) { /* empty */ }
+    } catch (error) {
+      enqueueSnackbar("Something went wrong, Please try again later!", {
+        variant: "error",
+      });
+    }
   }, []);
 
   const formatHealthStatus = (healthStatus) => {

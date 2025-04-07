@@ -18,7 +18,7 @@ export default function Dashboard() {
     };
 
     const token = localStorage.getItem("token");
-
+    
     if (!token) {
       enqueueSnackbar("Something went wrong, Please try again later!", {
         variant: "error",

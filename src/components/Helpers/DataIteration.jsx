@@ -1,5 +1,4 @@
-function DataIteration(props) {
-  const { datas = [], startLength, endLength, children } = props;
+function DataIteration({ datas = [], startLength, endLength, children }) {
   return (
     <>
       {datas &&

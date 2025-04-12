@@ -5,9 +5,9 @@ import ViewMoreTitle from "./ViewMoreTitle";
 export default function SectionStyleThreeHomeTwo({
   className,
   sectionTitle,
-  seeMoreUrl,
   products = [],
   showProducts,
+  seeMoreUrl,
 }) {
   return (
     <div className={`section-style-one ${className || ""}`}>

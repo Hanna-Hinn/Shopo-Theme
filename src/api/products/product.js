@@ -47,3 +47,15 @@ export const productByTagApi = async (tag, pageNumber = 1, limit = 5) => {
     return filteredProducts;
   // return [];
 };
+
+export const getProductByIdApi = async (id) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  const response = await axios.get(`${endpoints.products}/${id}`, {
+    headers,
+  });
+
+  return response.data;
+};

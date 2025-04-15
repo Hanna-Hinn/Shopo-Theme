@@ -45,7 +45,6 @@ export default function HomeTwo() {
 
   return (
     <Layout>
-      <Banner className="banner-wrapper mb-[46px]" />
 
       {/* Featured Products */}
       <SectionStyleThreeHomeTwo

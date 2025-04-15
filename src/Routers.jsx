@@ -23,7 +23,7 @@ import Wishlist from "./components/Wishlist";
 const router = createBrowserRouter([
   { path: "/", element: <HomeTwo /> },
   { path: "/all-products", element: <AllProductPage /> },
-  { path: "/single-product", element: <SingleProductPage /> },
+  { path: "/single-product/:id", element: <SingleProductPage /> },
   { path: "/cart", element: <CardPage /> },
   { path: "/checkout", element: <CheakoutPage /> },
   { path: "/wishlist", element: <Wishlist /> },

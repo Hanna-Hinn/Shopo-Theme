@@ -23,7 +23,7 @@ export default function AllProductPage() {
 
         const formattedProducts = res?.data?.products?.map((product) => ({
           ...product,
-          price: parseFloat(product.price['$numberDecimal'] || 0),
+          price: parseFloat(product.price["$numberDecimal"] || 0),
         }));
 
         setProducts(formattedProducts || []);

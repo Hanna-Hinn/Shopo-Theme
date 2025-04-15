@@ -20,7 +20,7 @@ export default function ProductCardRowStyleOneTwo({ className, datas }) {
         </div>
         <div className="flex-1 flex flex-col justify-center h-full">
           <div>
-            <Link to="/single-product">
+            <Link to={`/single-product/${datas._id}`}>
               <p className="title mb-2 sm:text-[20px] text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-blue-600">
                 {datas.name}
               </p>
@@ -28,7 +28,7 @@ export default function ProductCardRowStyleOneTwo({ className, datas }) {
             <p className="price flex space-x-2 items-center  mb-2.5">
               <div className="price">
                 <span className="offer-price text-center text-qred font-600 text-[18px] mr-1 inline-block">
-                  {datas?.price["$numberDecimal"] || 0}$
+                  ${datas?.price["$numberDecimal"] || 0}
                 </span>
               </div>
             </p>
@@ -40,7 +40,6 @@ export default function ProductCardRowStyleOneTwo({ className, datas }) {
       </div>
       {/* quick-access-btns */}
       <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-[30px]  transition-all duration-300 ease-in-out">
-
         <a href="#">
           <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
             <ThinLove />

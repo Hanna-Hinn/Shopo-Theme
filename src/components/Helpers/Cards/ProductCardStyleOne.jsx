@@ -77,7 +77,8 @@ export default function ProductCardStyleOne({ datas, type }) {
 
         <div className="reviews flex space-x-[1px] mt-3 mb-3">
           {Array.from({ length: 5 }, (_, i) => {
-            const averageRating = datas?.averageRating["$numberDecimal"] || 0;
+            const averageRating = datas?.averageRating?.["$numberDecimal"] || 0;
+
             const fullStars = Math.floor(averageRating);
             const hasHalfStar = averageRating - fullStars >= 0.5;
 
@@ -91,7 +92,7 @@ export default function ProductCardStyleOne({ datas, type }) {
           })}
         </div>
 
-        <Link to="/single-product">
+        <Link to={`/single-product/${datas._id}`}>
           <p className="title mb-2 text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-blue-600">
             {datas?.name}
           </p>
@@ -105,8 +106,8 @@ export default function ProductCardStyleOne({ datas, type }) {
         )}
 
         <p className="price">
-          <span className="main-price text-qgray  font-600 text-[18px]">
-            {datas?.price+ "$"}
+          <span className="main-price text-qred  font-600 text-[18px]">
+            ${datas?.price["$numberDecimal"] || 0}
           </span>
         </p>
       </div>

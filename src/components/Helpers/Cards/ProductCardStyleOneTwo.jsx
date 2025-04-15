@@ -37,7 +37,7 @@ export default function ProductCardStyleOneTwo({ datas }) {
         </div>
 
         <div className="flex flex-col justify-between h-full">
-          <Link to="/single-product">
+          <Link to={`/single-product/${datas._id}`}>
             <p className="title mb-1 text-[20px] font-semibold text-center text-qblack leading-[24px] line-clamp-2 hover:text-blue-600">
               {datas.name}
             </p>
@@ -51,7 +51,7 @@ export default function ProductCardStyleOneTwo({ datas }) {
 
           <div className="flex justify-center mt-2">
             <span className="offer-price text-center text-qred font-semibold text-[18px] mr-1">
-              {datas?.price["$numberDecimal"] || 0}$
+              ${datas?.price["$numberDecimal"] || 0}
             </span>
           </div>
         </div>

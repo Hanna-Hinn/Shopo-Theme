@@ -2,36 +2,40 @@ import ProductCardStyleOne from "../Helpers/Cards/ProductCardStyleOne";
 import DataIteration from "../Helpers/DataIteration";
 import Star from "../Helpers/icons/Star";
 
-export default function SallerInfo({ products }) {
+export default function SallerInfo({ seller, products }) {
+  const fullName = `${seller?.firstName || ""} ${seller?.lastName || ""}`;
+  const location = seller?.addresses?.[0]
+    ? `${seller.addresses[0].city}, ${seller.addresses[0].state}`
+    : "Unknown Location";
+
   return (
     <div className="saller-info-wrapper w-full">
       <div className="saller-info sm:flex justify-between items-center pb-[30px] border-b border-[#E8E8E8]">
         <div className="sm:flex sm:space-x-5 items-center sm:w-1/4">
           <div className="saller w-[73px] h-[73px] rounded-full overflow-hidden">
             <img
-              src={`${
-                import.meta.env.VITE_PUBLIC_URL
-              }/assets/images/comment-user-1.png`}
-              alt="saller"
+              src={
+                seller?.imageUrl ||
+                `${import.meta.env.VITE_PUBLIC_URL}/assets/images/comment-user-1.png`
+              }
+              alt={fullName}
               className="w-full h-full object-cover"
             />
           </div>
           <div>
             <h6 className="text-[18px] font-medium leading-[30px]">
-              Ridoy Rock
+              {fullName}
             </h6>
             <p className="text-[13px] font-normal text-qgray leading-[30px]">
-              London,United Kingdom
+              {location}
             </p>
             <div className="flex items-center mt-4">
               <div className="flex">
-                <Star w="15" h="15" />
-                <Star w="15" h="15" />
-                <Star w="15" h="15" />
-                <Star w="15" h="15" />
-                <Star w="15" h="15" />
+                {[...Array(5)].map((_, index) => (
+                  <Star key={index} w="15" h="15" />
+                ))}
               </div>
-              <span className="text-[13px] font-normal ml-1">(4.5)</span>
+              <span className="text-[13px] font-normal ml-1">(5.0)</span>
             </div>
           </div>
         </div>
@@ -40,58 +44,55 @@ export default function SallerInfo({ products }) {
             <ul>
               <li className="text-qgray leading-[30px]">
                 <span className="text-[15px] font-normal text-qblack">
-                  Products
+                  Email
                 </span>
-                : 120
+                : {seller?.email || "N/A"}
               </li>
               <li className="text-qgray leading-[30px]">
                 <span className="text-[15px] font-normal text-qblack">
-                  Category
+                  Mobile
                 </span>
-                : Mobile Phone, Sports, Gaming, Electronics
+                : {seller?.mobile || "N/A"}
               </li>
               <li className="text-qgray leading-[30px]">
                 <span className="text-[15px] font-normal text-qblack">
-                  Tags
+                  Description
                 </span>
-                : Beer, Foamer
+                : {seller?.description || "N/A"}
               </li>
             </ul>
           </div>
-          <div className="w-full ">
+          <div className="w-full">
             <ul>
               <li className="text-qgray leading-[30px]">
                 <span className="text-[15px] font-normal text-qblack">
                   Products
                 </span>
-                : 120
+                : {products?.length || 0}
               </li>
               <li className="text-qgray leading-[30px]">
                 <span className="text-[15px] font-normal text-qblack">
-                  Category
+                  Role
                 </span>
-                : Mobile Phone, Sports, Gaming, Electronics
+                : {seller?.role || "N/A"}
               </li>
               <li className="text-qgray leading-[30px]">
                 <span className="text-[15px] font-normal text-qblack">
-                  Tags
+                  City
                 </span>
-                : Beer, Foamer
+                : {seller?.addresses?.[0]?.city || "N/A"}
               </li>
             </ul>
           </div>
         </div>
       </div>
+
       <div className="saller-product w-full mt-[30px]">
-        <h1 className="text-[18px] font-medium mb-5">Product from Shop</h1>
+        <h1 className="text-[18px] font-medium mb-5">Products from Shop</h1>
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5">
-          <DataIteration
-            datas={products}
-            startLength={0}
-            endLength={products.length}
-          >
+          <DataIteration datas={products} startLength={0} endLength={products.length}>
             {({ datas }) => (
-              <div key={datas.id} className="item">
+              <div key={datas._id} className="item">
                 <ProductCardStyleOne datas={datas} />
               </div>
             )}

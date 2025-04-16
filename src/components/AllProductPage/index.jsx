@@ -2,45 +2,68 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import BreadcrumbCom from "../BreadcrumbCom";
 import ProductCardStyleOne from "../Helpers/Cards/ProductCardStyleOne";
-import DataIteration from "../Helpers/DataIteration";
 import Layout from "../Partials/Layout";
-import { productApi } from "../../api/products/product";
+import { productApi, productByNameApi } from "../../api/products/product";
 
 export default function AllProductPage() {
   const [products, setProducts] = useState([]);
   const [totalPages, setTotalPages] = useState(1); // New state
+  const [totalProducts, setTotalProducts] = useState(0);
   const [filterToggle, setToggle] = useState(false);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const categoryName = searchParams.get("categoryName") || null;
   const pageNumber = parseInt(searchParams.get("pageNumber")) || 1;
+  const productName = searchParams.get("productName") || null;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await productApi(categoryName, pageNumber);
+        let fetchedProducts = [];
+        let fetchedTotalPages = 1;
+        let totalProductsCount = 0;
+        console.log("Search for productName:", productName);
 
-        const formattedProducts = res?.data?.products?.map((product) => ({
+        if (productName) {
+          const res = await productByNameApi(productName, pageNumber);
+          fetchedProducts = res?.data?.products || [];
+          console.log(res?.data?.products);
+          fetchedTotalPages = res?.data?.totalPages || 1;
+          totalProductsCount = res?.data?.totalProducts || 0;
+        } else {
+          const res = await productApi(categoryName, pageNumber);
+          fetchedProducts = res?.data?.products || [];
+          console.log(res?.data?.products);
+
+          fetchedTotalPages = res?.data?.totalPages || 1;
+          totalProductsCount = res?.data?.totalProducts || 0;
+        }
+
+        const formatted = fetchedProducts.map((product) => ({
           ...product,
-          price: parseFloat(product.price["$numberDecimal"] || 0),
+          price: parseFloat(product.price?.["$numberDecimal"] || 0),
         }));
 
-        setProducts(formattedProducts || []);
-        setTotalPages(res?.data?.totalPages || 1); // Capture total pages
+        setProducts(formatted);
+        setTotalPages(fetchedTotalPages);
+        setTotalProducts(totalProductsCount);
       } catch (error) {
         setProducts([]);
       }
     };
 
     fetchProducts();
-  }, [categoryName, pageNumber]);
+  }, [categoryName, pageNumber, productName]);
 
   const handlePageChange = (page) => {
-    const query = categoryName
-      ? `?pageNumber=${page}&categoryName=${categoryName}`
-      : `?pageNumber=${page}`;
-    navigate(`/all-products${query}`);
+    const queryParams = new URLSearchParams();
+
+    queryParams.set("pageNumber", page);
+    if (categoryName) queryParams.set("categoryName", categoryName);
+    if (productName) queryParams.set("productName", productName);
+
+    navigate(`/all-products?${queryParams.toString()}`);
   };
 
   return (
@@ -49,24 +72,12 @@ export default function AllProductPage() {
         <div className="container-x mx-auto">
           <BreadcrumbCom />
           <div className="w-full lg:flex lg:space-x-[30px]">
-            <div className="lg:w-[270px]">
-              <div className="w-full hidden lg:block h-[295px]">
-                <img
-                  src={`${
-                    import.meta.env.VITE_PUBLIC_URL
-                  }/assets/images/bannera-5.png`}
-                  alt=""
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            </div>
-
             <div className="flex-1">
               <div className="products-sorting w-full bg-white md:h-[70px] flex md:flex-row flex-col md:space-y-0 space-y-5 md:justify-between md:items-center p-[30px] mb-[40px]">
                 <div>
                   <p className="font-400 text-[13px]">
                     <span className="text-qgray">Showing</span> 1–
-                    {products.length} of {products.length} results
+                    {products.length} of {totalProducts} results
                   </p>
                 </div>
                 <div className="flex space-x-3 items-center">
@@ -109,35 +120,12 @@ export default function AllProductPage() {
                   </svg>
                 </button>
               </div>
-
-              <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5 mb-[40px]">
-                <DataIteration datas={products} startLength={0} endLength={6}>
-                  {({ datas }) => (
-                    <div data-aos="fade-up" key={datas._id}>
-                      <ProductCardStyleOne datas={datas} />
-                    </div>
-                  )}
-                </DataIteration>
-              </div>
-
-              <div className="w-full h-[164px] overflow-hidden mb-[40px]">
-                <img
-                  src={`${
-                    import.meta.env.VITE_PUBLIC_URL
-                  }/assets/images/bannera-6.png`}
-                  alt=""
-                  className="w-full h-full object-contain"
-                />
-              </div>
-
-              <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5 mb-[40px]">
-                <DataIteration datas={products} startLength={6} endLength={15}>
-                  {({ datas }) => (
-                    <div data-aos="fade-up" key={datas._id}>
-                      <ProductCardStyleOne datas={datas} />
-                    </div>
-                  )}
-                </DataIteration>
+              <div className="grid xl:grid-cols-4 grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-[30px] gap-5 mb-[40px]">
+                {products.map((product) => (
+                  <div data-aos="fade-up" key={product._id}>
+                    <ProductCardStyleOne datas={product} />
+                  </div>
+                ))}
               </div>
 
               {/* Pagination */}

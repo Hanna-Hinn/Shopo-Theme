@@ -59,3 +59,24 @@ export const getProductByIdApi = async (id) => {
 
   return response.data;
 };
+
+export const productByNameApi = async (productName, pageNumber = 1) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  
+  const params = {
+    productName,
+    pageNumber,
+  };
+
+  const response = await axios.get(
+    `${endpoints.products}/v1/searchFilter/v1/query`,
+    {
+      headers,
+      params,
+    }
+  );
+  return response.data;
+};

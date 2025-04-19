@@ -23,19 +23,15 @@ export default function AllProductPage() {
         let fetchedProducts = [];
         let fetchedTotalPages = 1;
         let totalProductsCount = 0;
-        console.log("Search for productName:", productName);
 
         if (productName) {
           const res = await productByNameApi(productName, pageNumber);
           fetchedProducts = res?.data?.products || [];
-          console.log(res?.data?.products);
           fetchedTotalPages = res?.data?.totalPages || 1;
           totalProductsCount = res?.data?.totalProducts || 0;
         } else {
           const res = await productApi(categoryName, pageNumber);
           fetchedProducts = res?.data?.products || [];
-          console.log(res?.data?.products);
-
           fetchedTotalPages = res?.data?.totalPages || 1;
           totalProductsCount = res?.data?.totalProducts || 0;
         }

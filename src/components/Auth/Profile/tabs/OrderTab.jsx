@@ -29,7 +29,6 @@ export default function OrderTab() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      console.log("No token found");
       return;
     }
 

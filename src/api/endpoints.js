@@ -5,4 +5,6 @@ export const endpoints = {
   sign: `${BACKEND_URL}/register`,
   users: `${BACKEND_URL}/users`,
   products: `${BACKEND_URL}/products`,
+  carts: `${BACKEND_URL}/carts`,
+  favorites: `${BACKEND_URL}/favorites`,
 };

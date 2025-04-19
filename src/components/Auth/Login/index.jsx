@@ -14,7 +14,6 @@ export default function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token) {
       enqueueSnackbar("You are already logged in.", { variant: "warning" });
       navigate("/"); // Redirect to homepage if a token exists
@@ -27,19 +26,35 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const { data: res } = await LoginApi({ email, password });
-
-      localStorage.setItem("token", res.data);
+  
+      const token = res.data;
+      localStorage.setItem("token", token);
       enqueueSnackbar(res.message || "Welcome Back!", { variant: "success" });
+  
+      try {
+        const payload = token.split(".")[1];
+        const decodedPayload = atob(payload);
+        const decodedPayloadObject = JSON.parse(decodedPayload);
+  
+        const userId = decodedPayloadObject?.id; 
+        localStorage.setItem("userId", userId); 
+  
 
-      // Navigate to dashboard or another protected route
-      navigate("/");
+      } catch (error) {
+        enqueueSnackbar("Something went wrong ss.", {
+          variant: "error",
+        });
+      }
+  
+      navigate("/"); // Navigate to home or dashboard
     } catch (err) {
       enqueueSnackbar("Login failed. Please try again.", { variant: "error" });
     }
   };
+  
 
   return (
     <Layout childrenClasses="pt-0 pb-0">

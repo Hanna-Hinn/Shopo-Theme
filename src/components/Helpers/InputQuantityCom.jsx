@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-export default function InputQuantityCom() {
-  const [quantity, setQuantity] = useState(1);
+export default function InputQuantityCom({ quantityStart = 1 }) {
+  const [quantity, setQuantity] = useState(quantityStart);
+
   const increment = () => {
     setQuantity((prev) => prev + 1);
   };
+
   const decrement = () => {
     if (quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
   };
+
   return (
     <div className="w-[120px] h-[40px] px-[26px] flex items-center border border-qgray-border">
       <div className="flex justify-between items-center w-full">

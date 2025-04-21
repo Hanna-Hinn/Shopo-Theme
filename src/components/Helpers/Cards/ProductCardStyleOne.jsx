@@ -109,8 +109,8 @@ export default function ProductCardStyleOne({ datas, type }) {
         )}
 
         <p className="price">
-          <span className="main-price text-qred  font-600 text-[18px]">
-            ${datas?.price || datas?.price["$numberDecimal"] || 0}
+          <span className="main-price text-qred font-600 text-[18px]">
+            ${Number(datas?.price?.["$numberDecimal"] || 0).toFixed(2)}
           </span>
         </p>
       </div>

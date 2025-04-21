@@ -110,7 +110,7 @@ export default function ProductCardStyleOne({ datas, type }) {
 
         <p className="price">
           <span className="main-price text-qred  font-600 text-[18px]">
-            ${datas?.price || 0}
+            ${datas?.price || datas?.price["$numberDecimal"] || 0}
           </span>
         </p>
       </div>

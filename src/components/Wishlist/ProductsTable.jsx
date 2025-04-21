@@ -1,5 +1,3 @@
-import InputQuantityCom from "../Helpers/InputQuantityCom";
-
 export default function ProductsTable({ className, items = [], onDeleteItem }) {
   return (
     <div className={`w-full ${className || ""}`}>

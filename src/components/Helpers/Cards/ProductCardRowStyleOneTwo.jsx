@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import QuickViewIco from "../icons/QuickViewIco";
 import ThinLove from "../icons/ThinLove";
+import { handleAddToCart } from "../../util/addTocart";
+import { handleAddToWish } from "../../util/addToWish";
 
 export default function ProductCardRowStyleOneTwo({ className, datas }) {
   return (
@@ -32,19 +34,24 @@ export default function ProductCardRowStyleOneTwo({ className, datas }) {
                 </span>
               </div>
             </p>
-            <button type="button" className="w-[116px] h-[40px]">
+            <button
+              type="button"
+              className="w-[116px] h-[40px]"
+              onClick={() => handleAddToCart(datas._id)}
+            >
               <span className="yellow-btn"> Add To Cart</span>
             </button>
           </div>
         </div>
       </div>
-      {/* quick-access-btns */}
-      <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-[30px]  transition-all duration-300 ease-in-out">
-        <a href="#">
-          <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-            <ThinLove />
-          </span>
-        </a>
+      <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20 transition-all duration-300 ease-in-out">
+        <button
+          onClick={() => handleAddToWish(datas._id)}
+          type="button"
+          className="w-10 h-10 flex justify-center items-center bg-primarygray rounded"
+        >
+          <ThinLove />
+        </button>
       </div>
     </div>
   );

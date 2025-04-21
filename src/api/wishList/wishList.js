@@ -8,7 +8,7 @@ export const wishApi = async (userId) => {
     },
   });
   
-  console.log("Wishlist data:", response.data);
+  
   return response.data.data;
 };
 

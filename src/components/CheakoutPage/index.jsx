@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { cartApi } from "../../api/carts/carts";
 import { enqueueSnackbar } from "notistack";
 import { UserApi, updateUser } from "../../api/auth/user";
-
+import { createOrderApi } from "../../api/order/order";
 export default function CheakoutPage() {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
@@ -35,7 +35,37 @@ export default function CheakoutPage() {
   const handleSelectAddress = (address) => {
     setSelectedAddress(address);
   };
+  const handlePlaceOrder = async () => {
+    if (!selectedAddress) {
+      enqueueSnackbar("Please select a billing address", {
+        variant: "warning",
+      });
+      return;
+    }
 
+    try {
+      // extract userId from JWT (or use user._id if you have it)
+      const token = localStorage.getItem("token");
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const userId = payload.id;
+
+      // call your API
+      const order = await createOrderApi(
+        userId,
+        "pending",
+        selectedAddress._id
+      );
+
+      enqueueSnackbar("Order placed successfully!", { variant: "success" });
+      // redirect wherever makes sense—e.g. an order-details page
+      navigate(`/orders/${order._id}`);
+    } catch (error) {
+      console.error(error);
+      enqueueSnackbar("Failed to place order. Please try again.", {
+        variant: "error",
+      });
+    }
+  };
   useEffect(() => {
     async function fetchCart() {
       try {
@@ -437,7 +467,12 @@ export default function CheakoutPage() {
                     </ul>
                   </div>
 
-                  <button className="mt-5 w-full h-[50px] black-btn flex justify-center items-center">
+                  <button
+                    type="button"
+                    onClick={handlePlaceOrder}
+                    disabled={!selectedAddress}
+                    className="mt-5 w-full h-[50px] black-btn flex justify-center items-center"
+                  >
                     <span className="text-sm font-semibold">
                       Place Order Now
                     </span>

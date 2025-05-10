@@ -3,8 +3,27 @@ import QuickViewIco from "../icons/QuickViewIco";
 import ThinLove from "../icons/ThinLove";
 import { handleAddToCart } from "../../util/addTocart";
 import { handleAddToWish } from "../../util/addToWish";
+import { useState, useEffect } from "react";
 
 export default function ProductCardRowStyleOneTwo({ className, datas }) {
+  const [currency, setCurrency] = useState("USD");
+  const [nisRate, setNisRate] = useState(1);
+
+  useEffect(() => {
+    const storedCurrency = localStorage.getItem("selectedCurrency") || "USD";
+    const storedRate = parseFloat(localStorage.getItem("usdToNisRate")) || 1;
+    setCurrency(storedCurrency);
+    setNisRate(storedRate);
+  }, []);
+
+  const getDisplayPrice = () => {
+    const price = parseFloat(datas?.price["$numberDecimal"] || 0);
+    if (currency === "NIS") {
+      return `₪${(price * nisRate).toFixed(2)}`;
+    }
+    return `$${price.toFixed(2)}`;
+  };
+
   return (
     <div
       data-aos="fade-left"
@@ -30,7 +49,7 @@ export default function ProductCardRowStyleOneTwo({ className, datas }) {
             <p className="price flex space-x-2 items-center  mb-2.5">
               <div className="price">
                 <span className="offer-price text-center text-qred font-600 text-[18px] mr-1 inline-block">
-                  ${datas?.price["$numberDecimal"] || 0}
+                  {getDisplayPrice()}
                 </span>
               </div>
             </p>

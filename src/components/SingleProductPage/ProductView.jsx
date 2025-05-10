@@ -7,10 +7,19 @@ import { handleAddToWish } from "../util/addToWish";
 export default function ProductView({ className, reportHandler, product }) {
   const [src, setSrc] = useState(product.imageUrl || "");
   const [quantity, setQuantity] = useState(1);
+  const [currency, setCurrency] = useState("USD");
+  const [nisRate, setNisRate] = useState(1);
 
   useEffect(() => {
     setSrc(product.imageUrl || "");
   }, [product]);
+
+  useEffect(() => {
+    const storedCurrency = localStorage.getItem("selectedCurrency") || "USD";
+    const storedRate = parseFloat(localStorage.getItem("usdToNisRate")) || 1;
+    setCurrency(storedCurrency);
+    setNisRate(storedRate);
+  }, []);
 
   const changeImgHandler = (current) => {
     setSrc(current);
@@ -28,12 +37,16 @@ export default function ProductView({ className, reportHandler, product }) {
     }
   };
 
+  const getDisplayPrice = () => {
+    const price = parseFloat(product.price.$numberDecimal || 0);
+    if (currency === "NIS") {
+      return `₪${(price * nisRate).toFixed(2)}`;
+    }
+    return `$${price.toFixed(2)}`;
+  };
+
   return (
-    <div
-      className={`product-view w-full lg:flex justify-between ${
-        className || ""
-      }`}
-    >
+    <div className={`product-view w-full lg:flex justify-between ${className || ""}`}>
       <div data-aos="fade-right" className="lg:w-1/2 xl:mr-[70px] lg:mr-[50px]">
         <div className="w-full">
           <div className="w-full h-[600px] border border-qgray-border flex justify-center items-center overflow-hidden relative mb-3">
@@ -62,29 +75,18 @@ export default function ProductView({ className, reportHandler, product }) {
       {/* Right Side */}
       <div className="flex-1">
         <div className="product-details w-full mt-10 lg:mt-0">
-          <span
-            data-aos="fade-up"
-            className="text-qgray text-xs font-normal uppercase tracking-wider mb-2 inline-block"
-          >
+          <span data-aos="fade-up" className="text-qgray text-xs font-normal uppercase tracking-wider mb-2 inline-block">
             {product.categoryName}
           </span>
-          <p
-            data-aos="fade-up"
-            className="text-xl font-medium text-qblack mb-4"
-          >
+          <p data-aos="fade-up" className="text-xl font-medium text-qblack mb-4">
             {product.name}
           </p>
 
-          <div
-            data-aos="fade-up"
-            className="flex space-x-[10px] items-center mb-6"
-          >
+          <div data-aos="fade-up" className="flex space-x-[10px] items-center mb-6">
             <div className="flex">
-              {[...Array(Math.round(Number(product.averageRating) || 0))].map(
-                (_, index) => (
-                  <Star key={index} />
-                )
-              )}
+              {[...Array(Math.round(Number(product.averageRating) || 0))].map((_, index) => (
+                <Star key={index} />
+              ))}
             </div>
             <span className="text-[13px] font-normal text-qblack">
               {product.ratingCount} Reviews
@@ -92,46 +94,24 @@ export default function ProductView({ className, reportHandler, product }) {
           </div>
 
           <div data-aos="fade-up" className="flex space-x-2 items-center mb-7">
-            <span className="text-2xl font-500 text-qred">
-              ${product.price.$numberDecimal}
-            </span>
+            <span className="text-2xl font-500 text-qred">{getDisplayPrice()}</span>
           </div>
-          <p
-            data-aos="fade-up"
-            className="text-qgray text-sm text-normal mb-[30px] leading-7"
-          >
+
+          <p data-aos="fade-up" className="text-qgray text-sm text-normal mb-[30px] leading-7">
             {product.description}
           </p>
 
           {/* Quantity and Add to Cart */}
-          <div
-            data-aos="fade-up"
-            className="quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px]"
-          >
+          <div data-aos="fade-up" className="quantity-card-wrapper w-full flex items-center h-[50px] space-x-[10px] mb-[30px]">
             <div className="w-[120px] h-full px-[26px] flex items-center border border-qgray-border">
               <div className="flex justify-between items-center w-full">
-                <button
-                  onClick={decrement}
-                  type="button"
-                  className="text-base text-qgray"
-                >
-                  -
-                </button>
+                <button onClick={decrement} type="button" className="text-base text-qgray">-</button>
                 <span className="text-qblack">{quantity}</span>
-                <button
-                  onClick={increment}
-                  type="button"
-                  className="text-base text-qgray"
-                >
-                  +
-                </button>
+                <button onClick={increment} type="button" className="text-base text-qgray">+</button>
               </div>
             </div>
             <div className="w-[60px] h-full flex justify-center items-center border border-qgray-border">
-              <button
-                type="button"
-                onClick={() => handleAddToWish(product._id, quantity)}
-              >
+              <button type="button" onClick={() => handleAddToWish(product._id, quantity)}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z"
@@ -156,8 +136,7 @@ export default function ProductView({ className, reportHandler, product }) {
 
           <div data-aos="fade-up" className="mb-[20px]">
             <p className="text-[13px] text-qgray leading-7">
-              <span className="text-qblack">Category :</span>{" "}
-              {product.categoryName}
+              <span className="text-qblack">Category :</span> {product.categoryName}
             </p>
             <p className="text-[13px] text-qgray leading-7">
               <span className="text-qblack">Available In Stock :</span>{" "}
@@ -165,10 +144,7 @@ export default function ProductView({ className, reportHandler, product }) {
             </p>
           </div>
 
-          <div
-            data-aos="fade-up"
-            className="flex space-x-2 items-center mb-[20px]"
-          >
+          <div data-aos="fade-up" className="flex space-x-2 items-center mb-[20px]">
             <span>
               <svg width="12" height="13" viewBox="0 0 12 13" fill="none">
                 <path
@@ -186,16 +162,9 @@ export default function ProductView({ className, reportHandler, product }) {
             </button>
           </div>
 
-          <div
-            data-aos="fade-up"
-            className="social-share flex items-center w-full"
-          >
-            <span className="text-qblack text-[13px] mr-[17px] inline-block">
-              Share This
-            </span>
-            <div className="flex space-x-5 items-center">
-              {/* Social buttons */}
-            </div>
+          <div data-aos="fade-up" className="social-share flex items-center w-full">
+            <span className="text-qblack text-[13px] mr-[17px] inline-block">Share This</span>
+            <div className="flex space-x-5 items-center">{/* Social buttons */}</div>
           </div>
         </div>
       </div>

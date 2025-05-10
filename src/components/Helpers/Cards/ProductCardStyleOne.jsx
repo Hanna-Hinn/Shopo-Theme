@@ -1,10 +1,38 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Star from "../icons/Star";
 import ThinLove from "../icons/ThinLove";
 import { handleAddToCart } from "../../util/addTocart";
 import { handleAddToWish } from "../../util/addToWish";
 
+const getSafePrice = (price) => {
+  if (!price) return 0;
+  if (typeof price === "object" && "$numberDecimal" in price) {
+    return Number(price["$numberDecimal"]) || 0;
+  }
+  return Number(price) || 0;
+};
+
 export default function ProductCardStyleOne({ datas, type }) {
+  const [currency, setCurrency] = useState("USD");
+  const [nisRate, setNisRate] = useState(1);
+
+  useEffect(() => {
+    const storedCurrency = localStorage.getItem("selectedCurrency") || "USD";
+    const storedRate = parseFloat(localStorage.getItem("usdToNisRate")) || 1;
+    setCurrency(storedCurrency);
+    setNisRate(storedRate);
+  }, []);
+
+  const safePrice = getSafePrice(datas?.price);
+
+  const getDisplayPrice = () => {
+    if (currency === "NIS") {
+      return `₪${(safePrice * nisRate).toFixed(2)}`;
+    }
+    return `$${safePrice.toFixed(2)}`;
+  };
+
   return (
     <div
       className="product-card-one w-full h-full bg-white relative group overflow-hidden"
@@ -19,7 +47,7 @@ export default function ProductCardStyleOne({ datas, type }) {
       >
         {datas?.availableInStock < 100 && (
           <div className="px-[30px] absolute left-0 top-3 w-full">
-            <div className="progress-title flex justify-between ">
+            <div className="progress-title flex justify-between">
               <p className="text-xs text-qblack font-400 leading-6">
                 Products Available
               </p>
@@ -81,7 +109,6 @@ export default function ProductCardStyleOne({ datas, type }) {
         <div className="reviews flex space-x-[1px] mt-3 mb-3">
           {Array.from({ length: 5 }, (_, i) => {
             const averageRating = datas?.averageRating?.["$numberDecimal"] || 0;
-
             const fullStars = Math.floor(averageRating);
             const hasHalfStar = averageRating - fullStars >= 0.5;
 
@@ -110,7 +137,7 @@ export default function ProductCardStyleOne({ datas, type }) {
 
         <p className="price">
           <span className="main-price text-qred font-600 text-[18px]">
-            ${Number(datas?.price?.["$numberDecimal"] || 0).toFixed(2)}
+            {getDisplayPrice()}
           </span>
         </p>
       </div>

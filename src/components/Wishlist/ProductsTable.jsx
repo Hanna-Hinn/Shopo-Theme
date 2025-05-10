@@ -1,4 +1,24 @@
+import { useEffect, useState } from "react";
+
 export default function ProductsTable({ className, items = [], onDeleteItem }) {
+  const [currency, setCurrency] = useState("USD");
+  const [nisRate, setNisRate] = useState(1);
+
+  useEffect(() => {
+    const storedCurrency = localStorage.getItem("selectedCurrency") || "USD";
+    const storedRate = parseFloat(localStorage.getItem("usdToNisRate")) || 1;
+    setCurrency(storedCurrency);
+    setNisRate(storedRate);
+  }, []);
+
+  const getDisplayPrice = (price) => {
+    const numericPrice = parseFloat(price?.["$numberDecimal"] || 0);
+    if (currency === "NIS") {
+      return `₪${(numericPrice * nisRate).toFixed(2)}`;
+    }
+    return `$${numericPrice.toFixed(2)}`;
+  };
+
   return (
     <div className={`w-full ${className || ""}`}>
       <div className="relative w-full overflow-x-auto border border-[#EDEDED]">
@@ -6,15 +26,9 @@ export default function ProductsTable({ className, items = [], onDeleteItem }) {
           <tbody>
             {/* Table heading */}
             <tr className="text-[13px] font-medium text-black bg-[#F6F6F6] whitespace-nowrap px-2 border-b default-border-bottom uppercase">
-              <td className="py-4 pl-10 w-[380px]">
-                Product
-              </td>
-              <td className="py-4 text-center">
-                Price
-              </td>
-              <td className="py-4 text-center w-[114px]">
-                {/* Empty cell for consistency */}
-              </td>
+              <td className="py-4 pl-10 w-[380px]">Product</td>
+              <td className="py-4 text-center">Price</td>
+              <td className="py-4 text-center w-[114px]">{/* Empty cell */}</td>
             </tr>
 
             {/* Table rows */}
@@ -39,7 +53,7 @@ export default function ProductsTable({ className, items = [], onDeleteItem }) {
 
                 <td className="py-4 text-center">
                   <span className="text-[15px] font-normal">
-                    ${item?.price["$numberDecimal"] || 0}
+                    {getDisplayPrice(item?.price)}
                   </span>
                 </td>
 

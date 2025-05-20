@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style.css";
 
-export default function Selectbox({ datas = [], className, action, children }) {
-  const [item, setItem] = useState(datas[0]);
+export default function Selectbox({ datas = [], className, action, value, children }) {
+  const [item, setItem] = useState(value || datas[0]);
   const [toggle, setToggle] = useState(false);
-  const handler = (e, value) => {
-    if (action) {
-      action(value);
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setItem(value);
     }
-    setItem(value);
-    setToggle(!toggle);
+  }, [value]);
+
+  const handler = (e, selectedValue) => {
+    if (action) {
+      action(selectedValue);
+    }
+    setItem(selectedValue);
+    setToggle(false); 
   };
+
   return (
     <>
       {datas.length > 0 && (
@@ -18,14 +26,14 @@ export default function Selectbox({ datas = [], className, action, children }) {
           <button
             onClick={() => setToggle(!toggle)}
             type="button"
-            className="my-select-box-btn "
+            className="my-select-box-btn"
           >
             {children ? children({ item }) : <span>{item}</span>}
           </button>
           {toggle && (
             <div
               className="click-away"
-              onClick={() => setToggle(!toggle)}
+              onClick={() => setToggle(false)}
             ></div>
           )}
           <div className={`my-select-box-section ${toggle ? "open" : ""}`}>
@@ -33,7 +41,7 @@ export default function Selectbox({ datas = [], className, action, children }) {
               {datas.map((value) => (
                 <li
                   className={item === value ? "selected" : ""}
-                  key={Math.random() + value}
+                  key={value}
                   onClick={(e) => handler(e, value)}
                 >
                   {value}

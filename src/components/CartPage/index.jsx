@@ -14,6 +14,23 @@ export default function CardPage({ cart = true }) {
   const [cartItems, setCartItems] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
+  // Retrieve currency and conversion rate
+  const selectedCurrency = localStorage.getItem("selectedCurrency") || "USD";
+  const usdToNisRate = parseFloat(localStorage.getItem("usdToNisRate") || "3.6");
+
+  // Format price based on selected currency
+  const formatPrice = (amount) => {
+    const convertedAmount = selectedCurrency === "NIS" ? amount * usdToNisRate : amount;
+    const currencySymbol = selectedCurrency === "NIS" ? "₪" : "$";
+    return `${currencySymbol}${convertedAmount.toFixed(2)}`;
+  };
+
+  // Calculate subtotal
+  const subtotal = cartItems.reduce((acc, item) => {
+    const price = parseFloat(item?.price?.["$numberDecimal"] || 0);
+    return acc + price * item.quantity;
+  }, 0);
+
   useEffect(() => {
     const fetchCart = async () => {
       const token = localStorage.getItem("token");
@@ -27,7 +44,6 @@ export default function CardPage({ cart = true }) {
 
       try {
         const userId = localStorage.getItem("userId");
-
         const data = await cartApi(userId);
         setCartItems(data?.cartItems || []);
       } catch (error) {
@@ -37,6 +53,7 @@ export default function CardPage({ cart = true }) {
 
     fetchCart();
   }, [navigate, refresh]);
+
   const handleDeleteItem = async (productId) => {
     try {
       const token = localStorage.getItem("token");
@@ -53,6 +70,7 @@ export default function CardPage({ cart = true }) {
   };
 
   const cartIsEmpty = cartItems.length === 0;
+
   return (
     <Layout childrenClasses={cart ? "pt-0 pb-0" : ""}>
       {cartIsEmpty ? (
@@ -84,16 +102,18 @@ export default function CardPage({ cart = true }) {
                 items={cartItems}
                 className="mb-[30px]"
                 onDeleteItem={handleDeleteItem}
+                selectedCurrency={selectedCurrency}
+                usdToNisRate={usdToNisRate}
               />
 
               <div className="w-full mt-[30px] flex sm:justify-end">
                 <div className="sm:w-[370px] w-full border border-[#EDEDED] px-[30px] py-[26px]">
                   <div className="sub-total mb-6">
                     <div className="flex justify-between mb-6">
-                      <p className="text-[15px] font-medium text-qblack">
-                        Subtotal
+                      <p className="text-[15px] font-medium text-qblack">Subtotal</p>
+                      <p className="text-[15px] font-medium text-qred">
+                        {formatPrice(subtotal)}
                       </p>
-                      <p className="text-[15px] font-medium text-qred">$365</p>
                     </div>
                     <div className="w-full h-[1px] bg-[#EDEDED]"></div>
                   </div>
@@ -102,40 +122,23 @@ export default function CardPage({ cart = true }) {
                     <span className="text-[15px] font-medium text-qblack mb-[18px] block">
                       Shipping
                     </span>
-                    {["Free Shipping", "Flat Rate", "Local Delivery"].map(
-                      (label, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center mb-1"
-                        >
-                          <div className="flex space-x-2.5 items-center">
-                            <input
-                              type="radio"
-                              name="shipping"
-                              className="accent-pink-500"
-                            />
-                            <span className="text-[13px] text-qgraytwo">
-                              {label}
-                            </span>
-                          </div>
-                          <span className="text-[13px] text-qgraytwo">
-                            +$00.00
-                          </span>
+                    {["Free Shipping", "Flat Rate", "Local Delivery"].map((label, index) => (
+                      <div key={index} className="flex justify-between items-center mb-1">
+                        <div className="flex space-x-2.5 items-center">
+                          <input type="radio" name="shipping" className="accent-pink-500" />
+                          <span className="text-[13px] text-qgraytwo">{label}</span>
                         </div>
-                      )
-                    )}
+                        <span className="text-[13px] text-qgraytwo">+{formatPrice(0)}</span>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="shipping-calculation w-full mb-3">
                     <div className="title mb-[17px]">
-                      <h1 className="text-[15px] font-medium">
-                        Calculate Shipping
-                      </h1>
+                      <h1 className="text-[15px] font-medium">Calculate Shipping</h1>
                     </div>
                     <div className="w-full h-[50px] border border-[#EDEDED] px-5 flex justify-between items-center mb-2">
-                      <span className="text-[13px] text-qgraytwo">
-                        Select Country
-                      </span>
+                      <span className="text-[13px] text-qgraytwo">Select Country</span>
                       <svg
                         width="11"
                         height="7"
@@ -166,18 +169,16 @@ export default function CardPage({ cart = true }) {
 
                   <div className="total mb-6">
                     <div className="flex justify-between">
-                      <p className="text-[18px] font-medium text-qblack">
-                        Total
+                      <p className="text-[18px] font-medium text-qblack">Total</p>
+                      <p className="text-[18px] font-medium text-qred">
+                        {formatPrice(subtotal)}
                       </p>
-                      <p className="text-[18px] font-medium text-qred">$365</p>
                     </div>
                   </div>
 
                   <Link to="/checkout">
                     <div className="w-full h-[50px] black-btn flex justify-center items-center">
-                      <span className="text-sm font-semibold">
-                        Proceed to Checkout
-                      </span>
+                      <span className="text-sm font-semibold">Proceed to Checkout</span>
                     </div>
                   </Link>
                 </div>

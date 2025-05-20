@@ -16,12 +16,11 @@ import OrderTab from "./tabs/OrderTab";
 import PasswordTab from "./tabs/PasswordTab";
 import Payment from "./tabs/Payment";
 import ProfileTab from "./tabs/ProfileTab";
-import WishlistTab from "./tabs/WishlistTab";
 import { enqueueSnackbar } from "notistack";
 
 export default function Profile() {
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove the token from storage
+    localStorage.removeItem("token"); 
   };
 
   const location = useLocation();
@@ -113,18 +112,7 @@ export default function Profile() {
                         </div>
                       </Link>
                     </div>
-                    <div className="item group">
-                      <Link to="/profile#wishlist">
-                        <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
-                          <span>
-                            <IcoLove />
-                          </span>
-                          <span className=" font-normal text-base">
-                            Wishlist
-                          </span>
-                        </div>
-                      </Link>
-                    </div>
+
                     <div className="item group">
                       <Link to="/profile#address">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
@@ -179,10 +167,7 @@ export default function Profile() {
                       <>
                         <OrderTab />
                       </>
-                    ) : active === "wishlist" ? (
-                      <>
-                        <WishlistTab />
-                      </>
+
                     ) : active === "address" ? (
                       <>
                         <AddressesTab />

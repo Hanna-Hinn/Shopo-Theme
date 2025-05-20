@@ -7,3 +7,6 @@ export const BACKEND_URL =
 
 export const SOCKET_URL =
   "https://green-sage-backend-f0f077d7fa9c.herokuapp.com";
+
+export const BACKEND_URLRate = "  https://api.exchangerate.host";
+

@@ -1,10 +1,29 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function ProductCardRowStyleTwo({ className, datas }) {
+  const [currency, setCurrency] = useState("USD");
+  const [nisRate, setNisRate] = useState(1);
+
+  useEffect(() => {
+    const storedCurrency = localStorage.getItem("selectedCurrency") || "USD";
+    const storedRate = parseFloat(localStorage.getItem("usdToNisRate")) || 1;
+    setCurrency(storedCurrency);
+    setNisRate(storedRate);
+  }, []);
+
+  const getDisplayPrice = () => {
+    const price = parseFloat(datas?.price["$numberDecimal"] || 0);
+    if (currency === "NIS") {
+      return `₪${(price * nisRate).toFixed(2)}`;
+    }
+    return `$${price.toFixed(2)}`;
+  };
+
   return (
     <div
       data-aos="fade-up"
-      className={`product-card-row-two w-full  ${className || ""}`}
+      className={`product-card-row-two w-full ${className || ""}`}
     >
       <div className="w-full h-[105px] bg-white border border-primarygray px-5 ">
         <div className="w-full h-full flex space-x-5 justify-center items-center">
@@ -24,7 +43,7 @@ export default function ProductCardRowStyleTwo({ className, datas }) {
 
             <p className="price">
               <span className="offer-price text-center text-qred font-600 text-[18px] mr-1 inline-block">
-                ${datas?.price["$numberDecimal"] || 0}
+                {getDisplayPrice()}
               </span>
             </p>
           </div>
